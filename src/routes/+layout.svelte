@@ -1,17 +1,20 @@
+<script>
+</script>
+
 <div class="navbar">
   <a href="/"><h1>mtl.deals</h1></a>
   <nav class="buttons">
-    <ul>
-      <li>
-        <a href="/" data-sveltekit-prefetch>Home</a>
-      </li>
-      <li>
-        <a href="/about" data-sveltekit-prefetch>About</a>
-      </li>
-      <li>
-        <a href="/" data-sveltekit-prefetch>Setting</a>
-      </li>
-    </ul>
+    <div class="ul">
+      <a href="/" data-sveltekit-prefetch>
+      Home
+      </a>
+      <a href="/about" data-sveltekit-prefetch>
+      About
+      </a>
+      <a href="/" data-sveltekit-prefetch>
+      Setting
+      </a>
+    </div>
   </nav>
 </div>
 
@@ -19,11 +22,36 @@
 
 <style>
 
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: grey;
-  }
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  padding: 1rem 2rem;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(3, 15, 20);
+}
+nav .ul {
+  display: flex;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+nav a {
+  padding: 1rem;
+  margin: 1rem;
+  background: #003554;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  transform: scale(1.1);
+  background: #006494;
+}
+
 
 </style>
