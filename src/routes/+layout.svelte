@@ -26,10 +26,10 @@
   position: sticky;
   top: 0;
   display: flex;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   justify-content: space-between;
   align-items: center;
-  background: rgb(3, 15, 20);
+  background: rgb(36, 39, 41);
 }
 nav .ul {
   display: flex;
