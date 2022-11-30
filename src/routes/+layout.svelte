@@ -50,7 +50,7 @@ nav a {
 }
 
 .login:hover { 
-  background: #004974;
+  background: #43494d;
 }
 
 nav a:hover {
