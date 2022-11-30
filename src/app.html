@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
 		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 			* {
 				padding: 0;
@@ -17,6 +17,12 @@
 			body {
 				background-color: #ffffff;
 				color: #000000;
+				scrollbar-width: none;
+			}
+
+			/* width */
+			::-webkit-scrollbar {
+				width: 0;
 			}
 		</style>
 	</head>

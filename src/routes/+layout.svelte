@@ -5,14 +5,11 @@
   <a href="/"><h1>mtl.deals</h1></a>
   <nav class="buttons">
     <div class="ul">
-      <a href="/" data-sveltekit-prefetch>
-      Home
-      </a>
-      <a href="/about" data-sveltekit-prefetch>
-      About
+      <a href="/about" class="login" data-sveltekit-prefetch>
+      Login
       </a>
       <a href="/" data-sveltekit-prefetch>
-      Setting
+      Register
       </a>
     </div>
   </nav>
@@ -29,7 +26,7 @@
   padding: 0.5rem 2rem;
   justify-content: space-between;
   align-items: center;
-  background: rgb(36, 39, 41);
+  background: #242729;
 }
 nav .ul {
   display: flex;
@@ -41,17 +38,28 @@ a {
   color: white;
 }
 nav a {
-  padding: 1rem;
+  padding: 1rem 2rem;
   margin: 1rem;
-  background: #003554;
-  border-radius: 15px;
+  background: #004974;
+  border-radius: 10px;
   transition: 0.3s;
 }
 
+.login {
+  background: none;
+}
+
+.login:hover { 
+  background: #004974;
+}
+
 nav a:hover {
-  transform: scale(1.1);
   background: #006494;
 }
 
+nav a:active {
+  transform: scale(0.9);
+
+}
 
 </style>
