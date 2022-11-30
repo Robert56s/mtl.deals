@@ -12,6 +12,11 @@ const { products } = data;
     {/each}
 </main>
 
+<footer>
+    
+    <p>Copyright &copy; Devpractical.com</p>
+</footer>
+
 <style>
     main {
         min-height: 100rem;
@@ -19,6 +24,13 @@ const { products } = data;
 
     div {
         padding: 2rem 2rem;
+    }
+
+    footer{
+        text-align: center;
+        padding: 1rem;
+        margin: 1rem;
+
     }
     
 </style>
