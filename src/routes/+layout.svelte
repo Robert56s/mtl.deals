@@ -1,6 +1,29 @@
 <script>
 </script>
 
+<svelte:head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      scrollbar-width: none;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 0;
+    }
+  </style>
+</svelte:head>
+
 <div class="navbar">
   <a href="/"><h1>mtl.deals</h1></a>
   <nav class="buttons">

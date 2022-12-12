@@ -1,6 +1,7 @@
 <div class="box">
     <div class="buttons">
-        buttons
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
     </div>
     <hr>
     <h2>Create an Account</h2>
@@ -31,7 +32,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        background: rgb(223, 223, 223);
+        background: rgb(184, 184, 184);
         border-radius: 16px;
     }
     form {
@@ -39,9 +40,36 @@
         flex-direction: column;
         margin: 1rem;
     }
+
+    h2 {
+        margin: 1rem;
+        text-align: center;
+    }
+    h4 {
+        margin-inline: 1rem;
+    }
     label {
         margin: 1rem;
         flex: 1;
+    }
+
+    button {
+        background: rgb(120, 121, 121);
+        display: flex;
+        padding: 0.5rem 1rem;
+        align-self: center;
+        opacity: 1;
+        transition: 0.3s;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: rgb(165, 165, 165);
+    }
+
+    button:active {
+        transform: scale(0.9);
     }
 
 </style>
