@@ -5,10 +5,10 @@
   <a href="/"><h1>mtl.deals</h1></a>
   <nav class="buttons">
     <div class="ul">
-      <a href="/about" class="login" data-sveltekit-prefetch>
+      <a href="/login" class="login" data-sveltekit-prefetch>
       Login
       </a>
-      <a href="/" data-sveltekit-prefetch>
+      <a href="/register" data-sveltekit-prefetch>
       Register
       </a>
     </div>
