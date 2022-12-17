@@ -1,3 +1,11 @@
+<script>
+    /** @type {import('./$types').PageData} */
+    export let data;
+</script>
+
+{#if data.session}
+    <p>Welcome, {data.session.user.email}</p>
+{:else}
 <div class="box">
     <div class="buttons">
         <a href="/login">Login</a>
@@ -5,7 +13,7 @@
     </div>
     <hr>
     <h2>Create an Account</h2>
-    <form action="/login" method="post">
+    <form action="?/register" method="POST">
         <h4>Email</h4>
         <label>
             <input name="email" type="email">
@@ -24,6 +32,7 @@
     <h2>or</h2>
     
 </div>
+{/if}
 
 <style>
     .box {

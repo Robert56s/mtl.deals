@@ -1,4 +1,6 @@
 <script>
+	export let data;
+	
 	import { invalidate } from "$app/navigation"
 	import { supabaseClient } from "$lib/supabase"
 	import { onMount } from 'svelte';
@@ -41,8 +43,14 @@
 	<a href="/"><h1>mtl.deals</h1></a>
 	<nav class="buttons">
 		<div class="ul">
+			{#if data.session}
+			<form action="/logout" method="POST">
+				<button>Logout</button>
+			</form>
+			{:else}
 			<a href="/login" class="login" data-sveltekit-prefetch> Login </a>
 			<a href="/register" data-sveltekit-prefetch> Register </a>
+			{/if}
 		</div>
 	</nav>
 </div>
