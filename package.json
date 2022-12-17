@@ -12,6 +12,8 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "1.25.0",
+		"@supabase/auth-helpers-sveltekit": "^0.8.6",
+		"@supabase/supabase-js": "^2.2.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"eslint": "^8.16.0",
