@@ -1,8 +1,9 @@
 <script>
 	export let data;
-	
-	import { invalidate } from "$app/navigation"
-	import { supabaseClient } from "$lib/supabase"
+
+	// import { enhance } from "$app/forms";
+	import { invalidate } from "$app/navigation";
+	import { supabaseClient } from "$lib/supabase";
 	import { onMount } from 'svelte';
 
 	onMount(() => {
@@ -14,6 +15,14 @@
 			subscribtion.unsubscribe();
 		};
 	});
+
+	// const submitLogout = async ({ cancel }) => {
+	// 	const { error } = await supabaseClient.auth.signOut();
+	// 	if (error) {
+	// 		console.log(error);
+	// 	}
+	// 	cancel();
+	// }
 </script>
 
 <svelte:head>
@@ -73,12 +82,12 @@
 		  list-style: none;
 	}
 
-	a {
+	button, a {
 	  text-decoration: none;
 	  color: white;
 	}
 	
-	nav a {
+	button, nav a {
 	  	padding: 1rem 2rem;
 	  	margin: 1rem;
 	  	background: #004974;

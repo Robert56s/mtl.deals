@@ -1,12 +1,11 @@
-
 <div class="box">
     <div class="buttons">
         <a href="/login">Login</a>
         <a href="/register">Register</a>
     </div>
     <hr>
-    <h2>Create an Account</h2>
-    <form action="?/register" method="POST">
+    <h2>Login to an Account</h2>
+    <form action="?/login" method="POST">
         <h4>Email</h4>
         <label>
             <input name="email" type="email">
@@ -15,19 +14,15 @@
         <label>
             <input name="password" type="password">
         </label>
-        <label>
-            <input type="checkbox" name="tos">
-            I agree and understand the Terms & Condistions*
-        </label>
-        <button>Register</button>
+        <button>Login</button>
     </form>
     <hr>
     <h2>or</h2>
-    
 </div>
 
 <style>
     .box {
+        min-width: 20rem;
         padding: 2rem;
         position: fixed;
         left: 50%;
