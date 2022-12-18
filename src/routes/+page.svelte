@@ -1,19 +1,21 @@
 <script>
 export let data;
-const { products } = data;
 </script>
 
 <main>
-    {#each products as product}
-    <div class="div">
-        <h2>{product.title}</h2>
-        <p>{product.description}</p>
-    </div>
-    {/each}
+    {#if data.session}
+        <p>Welcome, {data.session.user.email}</p>
+    {:else}
+        {#each data.products as product}
+        <div class="div">
+            <h2>{product.title}</h2>
+            <p>{product.description}</p>
+        </div>
+        {/each}
+    {/if}
 </main>
 
 <footer>
-    
     <p>Copyright &copy; Devpractical.com</p>
 </footer>
 
