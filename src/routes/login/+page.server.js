@@ -1,5 +1,5 @@
 import { AuthApiError } from '@supabase/supabase-js';
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -13,11 +13,11 @@ export const actions = {
 
         if (err) {
             if (err instanceof AuthApiError && err.status === 400) {
-                return invalid(400, {
+                return fail(400, {
                     error: "Invalid crendentials"
                 })
             }
-            return invalid( 500, {
+            return fail( 500, {
                 message: "Server error. Try again later."
             })
         }

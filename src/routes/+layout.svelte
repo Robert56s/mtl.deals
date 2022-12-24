@@ -64,6 +64,7 @@
 	</nav>
 </div>
 
+
 <slot />
 
 <style>
@@ -72,6 +73,7 @@
 	  	top: 0;
 	  	display: flex;
 	  	padding: 0.5rem 2rem;
+		height: 3.5rem;
 	  	justify-content: space-between;
 	  	align-items: center;
 	  	background: #242729;
@@ -82,12 +84,12 @@
 		  list-style: none;
 	}
 
-	button, a {
+    a {
 	  text-decoration: none;
 	  color: white;
 	}
 	
-	button, nav a {
+	nav a {
 	  	padding: 1rem 2rem;
 	  	margin: 1rem;
 	  	background: #004974;
@@ -109,5 +111,23 @@
 
 	nav a:active {
 	  	transform: scale(0.9);
+	}
+
+	button {
+		background-color: #4CAF50;
+		border-style: none;
+		border-radius: 5px;
+		padding: 0.5rem 1rem;
+	}
+
+	button:hover {
+		background-color: #78af79;
+	}
+
+
+	/* disabled button class */
+	.disabled {
+  		opacity: 0.6;
+  		cursor: not-allowed;
 	}
 </style>
