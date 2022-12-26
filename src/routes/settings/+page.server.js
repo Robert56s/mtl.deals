@@ -26,13 +26,15 @@ export const actions = {
 
         //convert form entries data to an object
         const body = Object.fromEntries(await request.formData())
+
+        console.log(body)
         
-        const { data, error } = await locals.sb
+        const { data, error: err } = await locals.sb
         .from('profiles')
         .update({ username: body.username })
         .eq('id', locals.session.user.id)
 
         throw redirect(303, '/settings')
-    }
+    },
 };
 

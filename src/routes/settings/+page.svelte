@@ -3,10 +3,10 @@
 </script>
 <div>
     <h1>Edit username</h1>
-    <form action="/?accupdate" method="post">
+    <form action="?/accupdate" method="post">
         <h4>username</h4>
         <label for="username">
-            <input type="username" value="{data.profiles.username}">
+            <input name="username" type="username" value="{data.profiles.username}">
         </label>
         <button>save</button>
         

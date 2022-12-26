@@ -54,6 +54,7 @@
 		<div class="ul">
 			{#if data.session}
 			<form action="/logout" method="POST">
+				<a href="/settings">Settings</a>
 				<button>Logout</button>
 			</form>
 			{:else}
