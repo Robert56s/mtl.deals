@@ -1,5 +1,5 @@
 import { redirect } from "@sveltejs/kit";
-// import { randomBytes } from "node:crypto";
+import { randomBytes } from "node:crypto";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals} ) {
@@ -54,5 +54,19 @@ export const actions = {
 
         throw redirect(303, '/settings')
     },
+
+    avatarupdate: async ({ request, locals }) => {
+        
+        let token;
+        //convert form entries data to an object
+        const body = Object.fromEntries(await request.formData())
+
+        const buf = randomBytes(24)
+        token = buf.toString('hex');
+
+        // const { data, error } = await supabase.storage
+        // .from('profiles')
+        // .upload(`${locals.session.user.id}/${token}.png`, body.avatar)
+    }
 };
 
