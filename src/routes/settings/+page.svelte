@@ -14,11 +14,11 @@
     }
 </script>
 <div>
-    <form action="?/avatarupdate" method="post">
+    <form action="api/avatar" method="post">
         <label for="avatar">Choose a profile picture:</label>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <img class="upload" src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
-        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
+        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
 
         {#if avatar}
         <img class="avatar" src="{avatar}" alt="avatar">

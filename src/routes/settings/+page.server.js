@@ -51,17 +51,19 @@ export const actions = {
         throw redirect(303, '/settings')
     },
 
-    avatarupdate: async ({ request, locals }) => {
+    // avatarupdate: async ({ request, locals }) => {
         
-        //convert form entries data to an object
-        const values = await request.formData()
-        const token = randomBytes(24).toString('hex');
-        
-        console.log(values)
+    //     //convert form entries data to an object
+    //     const values = await request.formData()
+    //     const token = randomBytes(24).toString('hex');
 
-        // const { data, error } = await loacls.sb.storage
-        // .from('profiles')
-        // .upload(`${locals.session.user.id}/${token}.png`, body.avatar)
-    }
+    //     const file = values.get('image');
+
+    //     console.log(file)
+
+    //     // const { data, error } = await loacls.sb.storage
+    //     // .from('profiles')
+    //     // .upload(`${locals.session.user.id}/${token}.png`, body.avatar)
+    // }
 };
 
