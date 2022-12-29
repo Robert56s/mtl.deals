@@ -53,7 +53,7 @@
 	<nav class="buttons">
 		<div class="ul">
 			{#if data.session}
-			<form action="/logout" method="POST">
+			<form action="/api/logout" method="POST">
 				<a href="/settings">Settings</a>
 				<button>Logout</button>
 			</form>

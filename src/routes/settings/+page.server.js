@@ -22,10 +22,6 @@ export async function load({ locals} ) {
     const getAvatar = async () => {
         let { data: avatar_url, error: err1} = await locals.sb.from('profiles').select('avatar_url').eq('id', locals.session.user.id)
         avatar_url = avatar_url[0].avatar_url
-        // randomBytes(24, function(err, buffer) {
-        //     var token = buffer.toString('hex');
-        //     console.log(token)
-        // });
 
         let { data: avatar, error: err2 } = await locals.sb.storage.from('profiles').getPublicUrl(`${avatar_url}`)
         avatar = avatar.publicUrl
@@ -57,14 +53,13 @@ export const actions = {
 
     avatarupdate: async ({ request, locals }) => {
         
-        let token;
         //convert form entries data to an object
-        const body = Object.fromEntries(await request.formData())
+        const values = await request.formData()
+        const token = randomBytes(24).toString('hex');
+        
+        console.log(values)
 
-        const buf = randomBytes(24)
-        token = buf.toString('hex');
-
-        // const { data, error } = await supabase.storage
+        // const { data, error } = await loacls.sb.storage
         // .from('profiles')
         // .upload(`${locals.session.user.id}/${token}.png`, body.avatar)
     }

@@ -16,7 +16,7 @@ export let data;
 </main>
 
 <footer>
-    <p>Copyright &copy; Devpractical.com</p>
+    <p>Copyright &copy; mtl.deals</p>
 </footer>
 
 <style>
