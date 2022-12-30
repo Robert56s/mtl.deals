@@ -20,11 +20,13 @@ export async function load({ locals} ) {
     }
 
     const getAvatar = async () => {
-        let { data: avatar_url, error: err1} = await locals.sb.from('profiles').select('avatar_url').eq('id', locals.session.user.id)
-        avatar_url = avatar_url[0].avatar_url
-
-        let { data: avatar, error: err2 } = await locals.sb.storage.from('profiles').getPublicUrl(`${avatar_url}`)
-        avatar = avatar.publicUrl
+        
+        let { data: avatar, error } = await locals.sb
+            .from('profiles')
+            .select('avatar_base64')
+            .eq('id', locals.session.user.id)
+        
+        avatar = avatar[0].avatar_base64
         return avatar
     }
 
@@ -51,19 +53,19 @@ export const actions = {
         throw redirect(303, '/settings')
     },
 
-    // avatarupdate: async ({ request, locals }) => {
+    avatarupdate: async ({ request, locals }) => {
         
-    //     //convert form entries data to an object
-    //     const values = await request.formData()
-    //     const token = randomBytes(24).toString('hex');
+        //convert form entries data to an object
+        const values = await request.formData()
+        const token = randomBytes(24).toString('hex');
 
-    //     const file = values.get('image');
+        const file = values.get('image');
 
-    //     console.log(file)
+        console.log(file)
 
-    //     // const { data, error } = await loacls.sb.storage
-    //     // .from('profiles')
-    //     // .upload(`${locals.session.user.id}/${token}.png`, body.avatar)
-    // }
+        const { data, error } = await locals.sb.storage
+        .from('profiles')
+        .upload(`${locals.session.user.id}/${token}.png`, body.avatar)
+    }
 };
 
