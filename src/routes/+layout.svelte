@@ -48,27 +48,42 @@
 	</style>
 </svelte:head>
 
-<div class="navbar">
-	<a href="/"><h1>mtl.deals</h1></a>
-	<nav class="buttons">
-		<div class="ul">
-			{#if data.session}
-			<form action="/api/logout" method="POST">
-				<a href="/settings">Settings</a>
-				<button>Logout</button>
-			</form>
-			{:else}
-			<a href="/login" class="login" data-sveltekit-prefetch> Login </a>
-			<a href="/register" data-sveltekit-prefetch> Register </a>
-			{/if}
+<div class="app">
+	<main>
+		<div class="navbar">
+			<a href="/"><h1>mtl.deals</h1></a>
+			<nav class="buttons">
+				<div class="ul">
+					{#if data.session}
+					<form action="/api/logout" method="POST">
+						<a href="/settings">Settings</a>
+						<button>Logout</button>
+					</form>
+					{:else}
+					<a href="/login" class="login" data-sveltekit-prefetch> Login </a>
+					<a href="/register" data-sveltekit-prefetch> Register </a>
+					{/if}
+				</div>
+			</nav>
 		</div>
-	</nav>
+		<div class="slot">
+			<slot />
+		</div>
+	</main>
+	<footer>
+	</footer>
 </div>
 
-
-<slot />
-
 <style>
+	main {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+	.slot {
+		flex: 1;
+		display:flex;
+	}
 	.navbar {
 	  	position: sticky;
 	  	top: 0;
@@ -78,6 +93,7 @@
 	  	justify-content: space-between;
 	  	align-items: center;
 	  	background: #242729;
+		box-shadow: rgba(25, 25, 25, 0.5) 0px 0px 5px;
 	}
 
 	nav .ul {
@@ -126,9 +142,9 @@
 	}
 
 
-	/* disabled button class */
+	/* //disabled button class
 	.disabled {
   		opacity: 0.6;
   		cursor: not-allowed;
-	}
+	} */
 </style>
