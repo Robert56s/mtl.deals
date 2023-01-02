@@ -1,3 +1,5 @@
+import "$lib/supabase"
+import { getSupabase } from "@supabase/auth-helpers-sveltekit"
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import { z } from 'zod';
@@ -49,25 +51,40 @@ export const actions = {
             }
         }
 
-        // //locals.sb is the supabase client from hooks.server.js
-        // const {data, error: err} = await locals.sb.auth.signUp({
-        //     email: body.email,
-        //     password: body.password
-        // })
+        if (body.password !== body.passwordConfirm) {
+            let passNotMatching = true
+            return { passNotMatching }
+        }
         
-        // if (err) {
-        //     if (err instanceof AuthApiError && err.status === 400) {
-        //         console.log("api error")
-        //         return fail(400, {
-        //             error: "Invalid email or password"
-        //         })
-        //     }
-        //     console.log(" server error", err)
-        //     return fail(500, {
-        //         error: "Server error. Please try again later."
-        //     })
-        // }
+        
+        //locals.sb is the supabase client from hooks.server.js
+        const {data, error: err} = await locals.sb.auth.signUp({
+            email: body.email,
+            password: body.password
+        })
+        
+        if (err) {
+            if (err instanceof AuthApiError && err.status === 400) {
+                console.log("api error")
+                return fail(400, {
+                    errorSupabase: "Invalid email or password"
+                })
+            }
+            console.log(" server error", err)
+            return fail(500, {
+                errorSupabase: "Server error. Please try again later."
+            })
+        }
 
-        // throw redirect(303, '/')
+        const { session, supabaseClient } = await getSupabase()
+
+        let { data: data2, error: err2 } = await supabaseClient
+        .from('profiles')
+        .update({ "username": body.username })
+        .eq('id', session.user.id)
+        console.log(data2, err2)
+
+
+        throw redirect(303, '/')
     },
 };

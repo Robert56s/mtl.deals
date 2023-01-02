@@ -20,18 +20,33 @@
         <h4>Email</h4>
         <label>
             <input name="email" type="email">
+            {#if form?.errors?.email}
+            <div>{form?.errors?.email[0]}</div>
+            {/if}
         </label>
         <h4>Password</h4>
         <label>
             <input name="password" type="password">
+            {#if form?.errors?.password}
+            <div>{form?.errors?.password[0]}</div>
+            {/if}
         </label>
         <h4>Confirm Password</h4>
         <label>
             <input name="passwordConfirm" type="passwordConfirm">
+            {#if form?.errors?.passwordConfirm}
+            <div>{form?.errors?.passwordConfirm[0]}</div>
+            {/if}
+            {#if form?.passNotMatching}
+            <div>The passwords did not match</div>
+            {/if}
         </label>
         <label>
             <input type="checkbox" name="tos">
             I agree and understand the Terms & Condistions*
+            {#if form?.errors?.tos}
+            <div>{form?.errors?.tos[0]}</div>
+            {/if}
         </label>
         <button>Register</button>
     </form>
