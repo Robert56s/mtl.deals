@@ -1,3 +1,6 @@
+<script>
+    export let form;
+</script>
 
 <div class="box">
     <div class="buttons">
@@ -7,6 +10,13 @@
     <hr>
     <h2>Create an Account</h2>
     <form action="?/register" method="POST">
+        <h4>Username</h4>
+        <label>
+            <input name="username" type="username">
+            {#if form?.errors?.username}
+            <div>{form?.errors?.username[0]}</div>
+            {/if}
+        </label>
         <h4>Email</h4>
         <label>
             <input name="email" type="email">
@@ -14,6 +24,10 @@
         <h4>Password</h4>
         <label>
             <input name="password" type="password">
+        </label>
+        <h4>Confirm Password</h4>
+        <label>
+            <input name="passwordConfirm" type="passwordConfirm">
         </label>
         <label>
             <input type="checkbox" name="tos">

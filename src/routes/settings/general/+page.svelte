@@ -1,9 +1,11 @@
 <script>
     export let data;
 
-    let  avatar, fileinput, result;
+    console.log(data.session)
+    let  avatar, fileinput, result, classActive, classBlur, classShow;
 	
 	const onFileSelected =(e)=>{
+        classActive = "yes"
         let image = e.target.files[0];
 
         let reader = new FileReader();
@@ -25,54 +27,64 @@
 
         result = await response.json();
     }
+
 </script>
-<div>
-    
-    <label for="avatar">Choose a profile picture:</label>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <img class="upload" src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
-    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
-    {#if avatar}
-    <img class="avatar" src="{avatar}" alt="avatar">
-    {:else}
-    <img class="avatar" src="{data.avatar}" alt="avatar">
-    {/if}
-    <button on:click={saveAvatar}>submit</button>
-    
-    <h1>Edit username</h1>
-    <form action="?/accupdate" method="post">
-        <h4>username</h4>
-        <label for="username">
-            <input name="username" type="username" value="{data.username}">
-        </label>
-        <button>save</button>
-        
-    </form>
+<div class="user">
+    <div class="userAvatar" >
+        {#if avatar}
+        <img class="avatar" src="{avatar}" alt="avatar">
+        {:else}
+        <img class="avatar" src="{data.avatar}" alt="avatar">
+        {/if}
+        <div class="upload" >
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
+        </div>
+    </div>
+    <div class="edit">
+        <h1>User Info</h1>
+        <form action="?/accupdate" method="post">
+            <h4>username</h4>
+            <label for="username">
+                <input name="username" type="username" value="{data.username}">
+            </label>
+            <button>save</button>
+            <h4>email</h4>
+            <label for="email">
+                <input readonly name="email" type="email" value="{data.session.user.email}">
+            </label>
+        </form>
+    </div>
+</div>
+<div class="save">
+    <button class:active={classActive === 'yes'} on:click={saveAvatar} >submit</button>
 </div>
 
 <style>
-    h1 {
-        padding: 1rem;
+    .user {
+        display: flex;
+        justify-content:space-evenly
     }
-    form {
-        padding: 1rem;
-    }
-    
-    button {
-        margin: 0.5rem;
-        padding: 0.5rem 1rem;
+
+    .userAvatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
     }
 
     .avatar {
-        width: 50px;
-        height: 50px;
+        width: 8rem;
+        height: 8rem;
         border-radius: 50%;
+        transition: 0.3s;
     }
 
-    .upload {
+    .upload img {
         cursor: pointer;
         width: 50px;
-        height: 50px
+        height: 50px;
     }
 
     #avatar {

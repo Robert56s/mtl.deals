@@ -49,8 +49,8 @@
 </svelte:head>
 
 <div class="app">
-	<main>
-		<div class="navbar">
+	<div class="page">
+		<header>
 			<a href="/"><h1>mtl.deals</h1></a>
 			<nav class="buttons">
 				<div class="ul">
@@ -65,26 +65,25 @@
 					{/if}
 				</div>
 			</nav>
-		</div>
-		<div class="slot">
+		</header>
+		<main>
 			<slot />
-		</div>
-	</main>
-	<footer>
-	</footer>
+		</main>
+	</div>
 </div>
 
 <style>
-	main {
+	.page {
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
 	}
-	.slot {
+	main {
 		flex: 1;
 		display:flex;
+		flex-direction: column;
 	}
-	.navbar {
+	header {
 	  	position: sticky;
 	  	top: 0;
 	  	display: flex;
@@ -97,8 +96,8 @@
 	}
 
 	nav .ul {
-		  display: flex;
-		  list-style: none;
+		display: flex;
+		list-style: none;
 	}
 
     a {
