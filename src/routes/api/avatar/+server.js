@@ -9,7 +9,10 @@ export const POST = async ({ request, locals }) => {
         .update({ "avatar_base64": body.image })
         .eq('id', locals.session.user.id)
 
+    if (err) {
+        throw error(500, "Something went wrong")
+    }
     
-    return new Response(data)
+    throw redirect(303, '/settings/general')
 
 }

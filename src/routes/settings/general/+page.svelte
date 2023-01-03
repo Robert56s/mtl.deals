@@ -1,10 +1,10 @@
 <script>
     export let data;
 
-    let  avatar, fileinput, result, classActive;
+    let avatar, fileinput, avatarButton, usernameButton;
 	
 	const onFileSelected =(e)=>{
-        classActive = "yes"
+        avatarButton = "on"
         let image = e.target.files[0];
 
         let reader = new FileReader();
@@ -14,17 +14,19 @@
         };
     }
 
-    async function saveAvatar() {
-        
-        const response = await fetch('/api/avatar', {
+    const saveAvatar = async () => {
+        try {
+        await fetch('/api/avatar', {
           method: 'POST',
           body: JSON.stringify({image: avatar}),
           headers: {
             'content-type': 'application/json'
           }
         });
-
-        result = await response.json();
+    
+        } catch (err) {
+            console.log('an error as ocured', err)
+        }
     }
 
 </script>
@@ -39,38 +41,38 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
             <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
+            <button class="saveAvatar" class:avatarButtonActive={avatarButton === 'on'} on:click={saveAvatar}>save avatar</button>
+            
         </div>
     </div>
-    <div class="edit">
+    <div class="userInfo">
         <h1>User Info</h1>
         <form action="?/accupdate" method="post">
             <label for="username">
-                username
-                <input name="username" type="username" value="{data.username}">
+                <div>username</div>
+                <input name="username" type="username" value="{data.username}" on:input={() => {usernameButton = 'on'}}>
             </label>
-            <button>save</button>
+            <button class:usernameButtonActive={usernameButton === 'on'}>save</button>
         </form>
+        <div class="email">
             <label for="email">
-                email
+                <div>email</div>
                 <input readonly name="email" type="email" value="{data.session.user.email}">
             </label>
+        </div>
     </div>
-</div>
-<div class="save">
-    <button class:buttonActive={classActive === 'yes'} on:click={saveAvatar} >save avatar</button>
 </div>
 
 <style>
     .user {
         display: flex;
-        justify-content:space-evenly
+        justify-content:space-around
     }
 
     .userAvatar {
         display: flex;
         flex-direction: column;
         align-items: center;
-        
     }
     .avatar {
         width: 8rem;
@@ -78,19 +80,67 @@
         border-radius: 50%;
         transition: 0.3s;
     }
+    .upload {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items:center
+    }
     .upload img {
         cursor: pointer;
-        width: 50px;
-        height: 50px;
+        width: 3.125rem;
+        height: 3.125rem;
     }
     #avatar {
         display: none;
     }
 
-    .save {
+    .saveAvatar {
         visibility: hidden;
+        border-style: none;
+        border-radius: 0.2rem;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem;
+        transition: 0.3s;
+        cursor: pointer;
     }
-    .buttonActive {
-        visibility: visible;
+    .avatarButtonActive {
+        visibility: visible !important;
     }
+
+    .userInfo form button {
+        visibility: hidden;
+        border-style: none;
+        border-radius: 0.2rem;
+        padding: 0.5rem 1rem;
+        margin-left: 0.2rem;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .usernameButtonActive {
+        visibility: visible !important;
+    }
+
+    .userInfo {
+        flex:0.7;
+        display: flex;
+        flex-direction: column;
+        
+        
+    }
+    .userInfo form, .userInfo div {
+        margin-top: 1rem;
+    }
+    .userInfo input {
+        font-size: 0.9rem;
+        color: rgb(44, 44, 44);
+        padding: 0.5rem 1rem;
+        margin-top: 0.2rem;
+        min-width: 15rem;
+        display: inline-block;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
 </style>
