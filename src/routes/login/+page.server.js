@@ -18,7 +18,7 @@ export const actions = {
                 })
             }
             return fail( 500, {
-                message: "Server error. Try again later."
+                error: "Server error. Try again later."
             })
         }
 

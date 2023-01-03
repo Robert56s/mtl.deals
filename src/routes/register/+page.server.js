@@ -32,15 +32,12 @@ const registerSchema = z.object({
 /** @type {import('./$types').Actions} */
 export const actions = {
     register: async ({ request, locals }) => {
-        console.log("hit")
 
         //convert form entries data to an object
         const body = Object.fromEntries(await request.formData())
 
         try {
             const result = registerSchema.parse(body)
-            console.log('SUCCESS')
-            console.log(result)
         } catch (err) {
             console.log(err.flatten());
             const { fieldErrors: errors} = err.flatten()
@@ -60,8 +57,15 @@ export const actions = {
         //locals.sb is the supabase client from hooks.server.js
         const {data, error: err} = await locals.sb.auth.signUp({
             email: body.email,
-            password: body.password
+            password: body.password,
+            options: {
+                data: {
+                    username: body.username
+                }
+            }
         })
+
+        console.log(err)
         
         if (err) {
             if (err instanceof AuthApiError && err.status === 400) {
@@ -75,15 +79,6 @@ export const actions = {
                 errorSupabase: "Server error. Please try again later."
             })
         }
-
-        const { session, supabaseClient } = await getSupabase()
-
-        let { data: data2, error: err2 } = await supabaseClient
-        .from('profiles')
-        .update({ "username": body.username })
-        .eq('id', session.user.id)
-        console.log(data2, err2)
-
 
         throw redirect(303, '/')
     },

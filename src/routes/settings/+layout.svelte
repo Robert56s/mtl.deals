@@ -3,8 +3,9 @@
 </script>
 
 <div class="container">
-    <div class="name">
-        Settings
+    <div class="bar">
+        <h3>Settings</h3>
+        <a href="/"><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
     </div>
     <div class="main">
         <div class="navbar">
@@ -28,20 +29,38 @@
         display: flex;
         flex-flow: column;
         width: 100%;
+        background-color: #ffffff
     }
-    .name {
-        padding: 2rem 4rem;
+    
+    .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
+    .bar h3 {
+        margin: 1rem 2rem;
+    }
+    .bar img {
+        padding: 0.5rem 1rem;
+        margin: 0.5rem 1rem;
+        width: 2rem; 
+    }
+    .bar img:hover {
+        background-color: rgb(197, 197, 197);
+        border-radius: 0.3rem;
+        transition: 0.3s;
+    }
+
     .main {
         flex: 1;
         display: flex;
-        background-color: blanchedalmond;
         justify-content: center;
     }
     .navbar {
         width: 10rem;
         padding-inline: 0.5rem;
         margin: 1rem;
+        margin-top: 0rem;
         
     }
     .card {
@@ -69,6 +88,7 @@
         width: 70rem;
         padding: 1rem;
         margin: 1rem;
+        margin-top: 0rem;
         border-radius: 0.5rem;
     }
     .active { 

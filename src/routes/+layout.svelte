@@ -55,8 +55,9 @@
 			<nav class="buttons">
 				<div class="ul">
 					{#if data.session}
+					<!-- fix this -->
 					<form action="/api/logout" method="POST">
-						<a href="/settings">Settings</a>
+						<a href="/settings" data-sveltekit-prefetch>Settings</a>
 						<button>Logout</button>
 					</form>
 					{:else}

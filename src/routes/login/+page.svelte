@@ -1,55 +1,101 @@
+<script>
+    export let form;
+</script>
 <div class="box">
-    <div class="buttons">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+    <div>
+        <div class="buttons">
+            <a href="/login" class="activeButton">Login</a>
+            <a href="/register">Register</a>
+        </div>
+        <hr>
     </div>
-    <hr>
-    <h2>Login to an Account</h2>
     <form action="?/login" method="POST">
-        <h4>Email</h4>
+        <h2>Login to an Account</h2>
         <label>
+            Email
             <input name="email" type="email">
         </label>
-        <h4>Password</h4>
         <label>
+            Password
             <input name="password" type="password">
         </label>
+        {#if form?.error}
+        <div class="error">{form?.error}</div>
+        {/if}
         <button>Login</button>
     </form>
-    <hr>
-    <h2>or</h2>
 </div>
 
 <style>
+    input {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
     .box {
-        min-width: 20rem;
-        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        width: 30rem;
+        height: 36.5625rem;
+        padding: 1rem;
         position: fixed;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        background: rgb(184, 184, 184);
-        border-radius: 16px;
+        background: rgb(218, 218, 224);
+        border-radius: 0.5rem;
+        border-style: solid;
+        border-color: rgb(65, 65, 141);
     }
     form {
+        flex: 1;
+        padding-inline: 2rem;
         display: flex;
         flex-direction: column;
         margin: 1rem;
     }
-
+    
     h2 {
-        margin: 1rem;
+        margin-top: 1rem;
         text-align: center;
     }
-    h4 {
-        margin-inline: 1rem;
-    }
+
     label {
-        margin: 1rem;
+        margin: 0.3rem;
+    }
+
+    .buttons {
+        display: flex;
+    }
+
+    .buttons a {
         flex: 1;
+        text-align: center;
+        padding: 1rem;
+        color: inherit;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .buttons a:hover {
+        background-color: rgb(207, 207, 207);
+    }
+
+    .activeButton {
+        background-color: rgb(185, 185, 185) !important;
+    }
+
+    hr {
+        border: 0.05rem solid black;
     }
 
     button {
+        margin-top: 1rem;
         background: rgb(120, 121, 121);
         display: flex;
         padding: 0.5rem 1rem;
@@ -68,4 +114,8 @@
         transform: scale(0.9);
     }
 
+    .error {    
+        font-size: 0.7rem;
+        color: rgb(219, 0, 0);  
+    }
 </style>
