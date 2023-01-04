@@ -1,6 +1,13 @@
 <script>
     export let form;
+    let fileinput;
 </script>
+
+<!-- svelte-ignore a11y-missing-content -->
+<a class="a" href="/" bind:this={fileinput} data-sveltekit-prefetch></a>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="page" on:click={()=>{fileinput.click();}}>
+</div>
 <div class="box">
     <div>
         <div class="buttons">
@@ -25,7 +32,7 @@
         <button>Login</button>
     </form>
 </div>
-
+    
 <style>
     input {
         width: 100%;
@@ -37,6 +44,16 @@
         box-sizing: border-box;
     }
     
+    .a {
+        display: none;
+    }
+    .page {
+        top: 0px;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(129, 129, 129, 0.233);
+    }
     .box {
         display: flex;
         flex-direction: column;

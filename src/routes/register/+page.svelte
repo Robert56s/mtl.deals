@@ -1,57 +1,64 @@
 <script>
     export let form;
+    let fileinput;
 </script>
 
-<div class="box">
-    <div>
-        <div class="buttons">
-            <a href="/login">Login</a>
-            <a href="/register" class="activeButton">Register</a>
-        </div>
-        <hr>
-    </div>
-    <form action="?/register" method="POST">
-        <h2>Create an Account</h2>
-        <label> Username
-            <input name="username" type="username" placeholder="ex: bob">
-            {#if form?.errors?.username}
-            <div>{form?.errors?.username[0]}</div>
-            {/if}
-        </label>
-        <label> Email
-            <input name="email" type="email" placeholder="Your email..">
-            {#if form?.errors?.email}
-            <div>{form?.errors?.email[0]}</div>
-            {/if}
-        </label>
-        <label> Password
-            <input name="password" type="password"  placeholder="********">
-            {#if form?.errors?.password}
-            <div>{form?.errors?.password[0]}</div>
-            {/if}
-        </label>
-        <label> Confirm Password
-            <input name="passwordConfirm" type="password" placeholder="********">
-            {#if form?.errors?.passwordConfirm}
-            <div>{form?.errors?.passwordConfirm[0]}</div>
-            {/if}
-            {#if form?.passNotMatching}
-            <div>The passwords did not match</div>
-            {/if}
-        </label>
-        <label>
-            <input class="checkbox" type="checkbox" name="tos">
-            I agree and understand the Terms & Condistions*
-            {#if form?.errors?.tos}
-            <div>{form?.errors?.tos[0]}</div>
-            {/if}
-            {#if form?.errorSupabase}
-            <div>{form?.errorSupabase}</div>
-            {/if}
-        </label>
-        <button>Register</button>
-    </form> 
+<!-- svelte-ignore a11y-missing-content -->
+<a class="a" href="/" bind:this={fileinput} data-sveltekit-prefetch></a>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="page" on:click={()=>{fileinput.click();}}>
 </div>
+    <div class="box">
+        <div>
+            <div class="buttons">
+                <a href="/login">Login</a>
+                <a href="/register" class="activeButton">Register</a>
+            </div>
+            <hr>
+        </div>
+        <form action="?/register" method="POST">
+            <h2>Create an Account</h2>
+            <label> Username
+                <input name="username" type="username" placeholder="ex: bob">
+                {#if form?.errors?.username}
+                <div>{form?.errors?.username[0]}</div>
+                {/if}
+            </label>
+            <label> Email
+                <input name="email" type="email" placeholder="Your email..">
+                {#if form?.errors?.email}
+                <div>{form?.errors?.email[0]}</div>
+                {/if}
+            </label>
+            <label> Password
+                <input name="password" type="password"  placeholder="********">
+                {#if form?.errors?.password}
+                <div>{form?.errors?.password[0]}</div>
+                {/if}
+            </label>
+            <label> Confirm Password
+                <input name="passwordConfirm" type="password" placeholder="********">
+                {#if form?.errors?.passwordConfirm}
+                <div>{form?.errors?.passwordConfirm[0]}</div>
+                {/if}
+                {#if form?.passNotMatching}
+                <div>The passwords did not match</div>
+                {/if}
+            </label>
+            <label>
+                <input class="checkbox" type="checkbox" name="tos">
+                I agree and understand the Terms & Condistions*
+                {#if form?.errors?.tos}
+                <div>{form?.errors?.tos[0]}</div>
+                {/if}
+                {#if form?.errorSupabase}
+                <div>{form?.errorSupabase}</div>
+                {/if}
+            </label>
+            <button>Register</button>
+        </form> 
+    </div>
+
 
 <style>
     input {
@@ -63,11 +70,20 @@
         border-radius: 4px;
         box-sizing: border-box;
     }
-
     input.checkbox {
         width: auto;
     }
     
+    .a {
+        display: none;
+    }
+    .page {
+        top: 0px;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(129, 129, 129, 0.233);
+    }
     .box {
         display: flex;
         flex-direction: column;
