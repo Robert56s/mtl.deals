@@ -72,7 +72,7 @@
         display: flex;
         flex-direction: column;
         width: 30rem;
-        height: 36.5625rem;
+        min-height: 36.5625rem;
         padding: 1rem;
         position: fixed;
         left: 50%;

@@ -1,7 +1,6 @@
 <script>
 	export let data;
 
-	// import { enhance } from "$app/forms";
 	import { invalidate } from "$app/navigation";
 	import { supabaseClient } from "$lib/supabase";
 	import { onMount } from 'svelte';
@@ -68,7 +67,7 @@
 			</nav>
 		</header>
 		<main>
-			<slot />
+			<slot></slot>
 		</main>
 	</div>
 </div>

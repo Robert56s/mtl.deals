@@ -87,9 +87,17 @@
         align-items:center
     }
     .upload img {
+        margin-top: 0.2rem;
         cursor: pointer;
         width: 3.125rem;
         height: 3.125rem;
+        border-style: solid;
+        border-color: aliceblue;
+        border-radius: 0.3rem;
+        transition: 0.3s;
+    }
+    .upload img:hover {
+        border-color: rgb(134, 134, 134);
     }
     #avatar {
         display: none;
