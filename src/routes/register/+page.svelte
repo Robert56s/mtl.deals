@@ -1,8 +1,20 @@
 <script>
+    import { onMount } from 'svelte';
+    import toast, { Toaster } from 'svelte-french-toast';
+
     export let form;
     let fileinput;
+
+    onMount(() => {
+        if (form?.success) {
+            toast.success('Success, check email for verification', {duration: 3000,})
+            console.log('hit')
+        }
+    })
+    
 </script>
 
+<Toaster></Toaster>
 <!-- svelte-ignore a11y-missing-content -->
 <a class="a" href="/" bind:this={fileinput} data-sveltekit-prefetch></a>
 <!-- svelte-ignore a11y-click-events-have-key-events -->

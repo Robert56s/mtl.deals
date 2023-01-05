@@ -78,8 +78,10 @@ export const actions = {
             return fail(500, {
                 errorSupabase: "Server error. Please try again later."
             })
+        } else {
+            let success = true
+            return { success }
         }
 
-        throw redirect(303, '/')
     },
 };

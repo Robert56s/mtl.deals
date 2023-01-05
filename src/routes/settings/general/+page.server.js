@@ -45,7 +45,7 @@ export const actions = {
         .update({ username: body.username })
         .eq('id', locals.session.user.id)
 
-        throw redirect(303, '/settings')
+        return { success: true }
     }
 };
 

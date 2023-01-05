@@ -1,8 +1,17 @@
 <script>
+    import { onMount } from 'svelte';
+    import toast, { Toaster } from 'svelte-french-toast';
     export let data;
+    export let form;
 
     let avatar, fileinput, avatarButton, usernameButton;
-	
+
+    onMount(() => {
+        if (form?.success) {
+            toast.success('Username successfully saved!')
+        }
+    })
+
 	const onFileSelected =(e)=>{
         avatarButton = "on"
         let image = e.target.files[0];
@@ -15,21 +24,30 @@
     }
 
     const saveAvatar = async () => {
-        try {
-        await fetch('/api/avatar', {
+
+        if (!avatar) {
+            return toast.error("This didn't work.")
+        }
+        const response = await fetch('/api/avatar', {
           method: 'POST',
           body: JSON.stringify({image: avatar}),
           headers: {
             'content-type': 'application/json'
           }
         });
-    
-        } catch (err) {
-            console.log('an error as ocured', err)
+
+        let result = await response.json();
+
+        if (result.message === 'success') {
+            toast.success('Successfully saved!')
+        } else {
+            toast.error("This didn't work.")
         }
+
     }
 
 </script>
+<Toaster></Toaster>
 <div class="user">
     <div class="userAvatar" >
         {#if avatar}
@@ -40,7 +58,7 @@
         <div class="upload" >
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
-            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)}>
             <button class="saveAvatar" class:avatarButtonActive={avatarButton === 'on'} on:click={saveAvatar}>save avatar</button>
             
         </div>
@@ -51,6 +69,7 @@
             <label for="username">
                 <div>username</div>
                 <input name="username" type="username" value="{data.username}" on:input={() => {usernameButton = 'on'}}>
+                <img class="editIcon" src="https://cdn.discordapp.com/attachments/828812665232425000/1060304137037807736/Edit_icon_the_Noun_Project_30184.svg.png" alt="edit icon">
             </label>
             <button class:usernameButtonActive={usernameButton === 'on'}>save</button>
         </form>
@@ -133,11 +152,16 @@
         flex:0.7;
         display: flex;
         flex-direction: column;
-        
-        
     }
     .userInfo form, .userInfo div {
         margin-top: 1rem;
+    }
+    .editIcon {
+        height: 1rem;
+        position: fixed;
+        transform: translateX(-2rem) translateY(0.8rem);
+        cursor: text;
+        z-index: 0;
     }
     .userInfo input {
         font-size: 0.9rem;

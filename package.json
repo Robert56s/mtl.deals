@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@supabase/auth-helpers-sveltekit": "^0.8.6",
 		"@supabase/supabase-js": "^2.2.2",
+		"svelte-french-toast": "^1.0.3",
 		"zod": "^3.20.2"
 	}
 }
