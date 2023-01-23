@@ -56,6 +56,7 @@
 					{#if data.session}
 					<!-- fix this -->
 					<form action="/api/logout" method="POST">
+						<a href="/create" data-sveltekit-prefetch>create</a>
 						<a href="/item/1" data-sveltekit-prefetch>items</a>
 						<a href="/settings" data-sveltekit-prefetch>Settings</a>
 						<button>Logout</button>

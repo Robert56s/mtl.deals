@@ -36,6 +36,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-inline: 2rem;
     }
     .bar h3 {
         margin: 1rem 2rem;
@@ -43,7 +44,7 @@
     .bar img {
         padding: 0.5rem 1rem;
         margin: 0.5rem 1rem;
-        width: 2rem; 
+        width: 1rem; 
     }
     .bar img:hover {
         background-color: rgb(197, 197, 197);

@@ -64,8 +64,12 @@
         padding: 0.3rem 1rem;
         display: flex;
         align-items: center;
-        background-color: rgb(0, 195, 255);
+        background-color: rgb(207, 207, 207);
         border-radius: 1rem;
+        transition: 0.3s;
+    }
+    .user:hover {
+        background-color: rgb(177, 177, 177);
     }
     .username {
         margin-right: 0.3rem;
