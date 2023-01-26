@@ -5,7 +5,7 @@
 <div class="container">
     <div class="bar">
         <h3>Settings</h3>
-        <a href="/"><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
+        <a href="/" data-sveltekit-prefetch><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
     </div>
     <div class="main">
         <div class="navbar">
@@ -44,7 +44,7 @@
     .bar img {
         padding: 0.5rem 1rem;
         margin: 0.5rem 1rem;
-        width: 1rem; 
+        width: 2rem; 
     }
     .bar img:hover {
         background-color: rgb(197, 197, 197);
