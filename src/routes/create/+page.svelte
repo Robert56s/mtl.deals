@@ -55,11 +55,11 @@
     </div>
     <div class="main">
         <div class="view-img">
-            <h4>upload an image</h4>
+            <h2>upload an image</h2>
             {#if img}
-            <img class="avatar" src="{img}" alt="avatar">
+            <img class="img" src="{img}" alt="img">
             {:else}
-            <img class="avatar" src="{data.img}" alt="avatar">
+            <img class="img" src="https://cdn.discordapp.com/attachments/828812665232425000/1068666821651218533/640px-IBM_PC_5150-640x437.jpg" alt="img">
             {/if}
 
             <div class="upload" >
@@ -67,11 +67,10 @@
                 <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
                 <input type="file" id="img" name="img" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
                 <button class="saveImg" class:imgButtonActive={imgButton === 'on'} >save avatar</button>
-                
             </div>
         </div>
         <div class="view-info">
-            
+            dassda
         </div>
     </div>
     <div class="bottombar">
@@ -84,6 +83,7 @@
         flex: 1;
         display: flex;
         flex-flow: column;
+        flex-wrap: wrap;
         width: 100%;
         background-color: #ffffff
     }
@@ -117,17 +117,20 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
     .view-info {
         flex: 0.5;
     }
 
 
-    .avatar {
-        
-        max-width: 5rem;
-        max-height: 10rem;
+    .img {
+        margin: 1rem;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        width: 50vw;
         transition: 0.3s;
+        border: solid
     }
     .upload {
         display: flex;
@@ -141,7 +144,7 @@
         width: 3.125rem;
         height: 3.125rem;
         border-style: solid;
-        border-color: aliceblue;
+        border-color: white;
         border-radius: 0.3rem;
         transition: 0.3s;
     }
@@ -152,7 +155,7 @@
         display: none;
     }
 
-    .saveAvatar {
+    .saveImg {
         visibility: hidden;
         border-style: none;
         border-radius: 0.2rem;
@@ -161,7 +164,7 @@
         transition: 0.3s;
         cursor: pointer;
     }
-    .avatarButtonActive {
+    .imgButtonActive {
         visibility: visible !important;
     }
     
