@@ -24,5 +24,6 @@
         justify-self: center;
         height: 10rem;
         border-radius: 50%;
+        aspect-ratio: 1/1;
     }
 </style>

@@ -75,6 +75,7 @@
         margin-right: 0.3rem;
     }
     .avatar {
+        aspect-ratio: 1/1;
         height: 4rem;
         border-radius: 50%;
     }

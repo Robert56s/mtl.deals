@@ -1,18 +1,13 @@
 <script>
     import { onMount } from 'svelte';
     import toast, { Toaster } from 'svelte-french-toast';
-    export let data;
-    export let form;
 
     let img, fileinput, imgButton;
 
-    onMount(() => {
-        if (form?.success) {
-            toast.success('Username successfully saved!')
-        }
-    })
+    let title, description;
+    let price = 0.01;
 
-	const onFileSelected =(e)=>{
+	const onFileSelected = async (e) => {
         imgButton = "on"
         let image = e.target.files[0];
 
@@ -23,14 +18,14 @@
         };
     }
 
-    const saveImg = async () => {
+    const saveOffer = async () => {
 
         if (!img) {
-            return toast.error("This didn't work.")
+            return toast.error("You forgot to upload a picture")
         }
-        const response = await fetch('/api/cimg', {
+        const response = await fetch('/api/saveoffer', {
           method: 'POST',
-          body: JSON.stringify({image: img}),
+          body: JSON.stringify({image: img, title, description, price}),
           headers: {
             'content-type': 'application/json'
           }
@@ -55,11 +50,11 @@
     </div>
     <div class="main">
         <div class="view-img">
-            <h2>upload an image</h2>
+            <h2>Picture</h2>
             {#if img}
             <img class="img" src="{img}" alt="img">
             {:else}
-            <img class="img" src="https://cdn.discordapp.com/attachments/828812665232425000/1068666821651218533/640px-IBM_PC_5150-640x437.jpg" alt="img">
+            <img class="img" src="https://cdn.discordapp.com/attachments/828812665232425000/1069399677658726400/white-image.png" alt="img">
             {/if}
 
             <div class="upload" >
@@ -70,11 +65,22 @@
             </div>
         </div>
         <div class="view-info">
-            dassda
+            <div class="form">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" placeholder="This is a title..." bind:value={title}>
+
+                <label for="description">Description</label>
+                <textarea name="description" id="description" placeholder="Describe your offer..." rows="7" bind:value={description}></textarea>
+                
+                <label>
+                    Price: 
+                    <input type="number" name="price" id="price" step="0.01" bind:value={price}> $
+                </label>
+            </div>
         </div>
     </div>
     <div class="bottombar">
-
+        <button on:click={saveOffer}>Save</button>
     </div>
 </div>
 
@@ -119,16 +125,13 @@
         align-items: center;
         justify-content: center;
     }
-    .view-info {
-        flex: 0.5;
-    }
-
-
+    
+    
     .img {
         margin: 1rem;
         aspect-ratio: 16 / 9;
         object-fit: contain;
-        width: 50vw;
+        width: 47vw;
         transition: 0.3s;
         border: solid
     }
@@ -154,7 +157,6 @@
     #img {
         display: none;
     }
-
     .saveImg {
         visibility: hidden;
         border-style: none;
@@ -168,4 +170,60 @@
         visibility: visible !important;
     }
     
+    .view-info {
+        flex: 0.5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .view-info .form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-inline: 2rem;
+    }
+    #title, #description {
+        width: 100%;
+        max-width: 40rem;
+        font-size: 1rem;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 4rem;
+    }
+    textarea {
+        width: 100%!important;
+    }
+    #description {
+        width: 10rem;
+    }
+    #price {
+        width: 5rem;
+        font-size: 1rem;
+    }
+
+    .bottombar {
+        display: flex;
+        justify-content: right;
+        padding: 1rem;
+    }
+    .bottombar button {
+        display: flex;
+        color: white;
+        padding: 1rem 2rem;
+	  	margin: 1rem;
+	  	background: #058a00;
+        border-style: none;
+	  	border-radius: 10px;
+	  	transition: 0.3s;
+    }
+    .bottombar button:hover {
+        background: #55c051;
+    }
+    .bottombar button:active {
+        transform: scale(0.9);
+    }
 </style>

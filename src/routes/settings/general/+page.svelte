@@ -94,6 +94,7 @@
         align-items: center;
     }
     .avatar {
+        aspect-ratio: 1/1;
         width: 8rem;
         height: 8rem;
         border-radius: 50%;
