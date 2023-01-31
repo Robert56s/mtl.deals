@@ -1,7 +1,6 @@
 import "$lib/supabase"
-import { getSupabase } from "@supabase/auth-helpers-sveltekit"
 import { AuthApiError } from '@supabase/supabase-js';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { z } from 'zod';
 
 const registerSchema = z.object({

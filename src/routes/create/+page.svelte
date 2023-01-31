@@ -25,7 +25,7 @@
         }
         const response = await fetch('/api/saveoffer', {
           method: 'POST',
-          body: JSON.stringify({image: img, title, description, price}),
+          body: JSON.stringify({image: img, title, description, price: price*100}),
           headers: {
             'content-type': 'application/json'
           }
