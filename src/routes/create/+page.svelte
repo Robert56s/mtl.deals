@@ -2,6 +2,8 @@
     import { onMount } from 'svelte';
     import toast, { Toaster } from 'svelte-french-toast';
 
+    let result;
+
     let img, fileinput, imgButton;
 
     let title, description;
@@ -31,7 +33,7 @@
           }
         });
 
-        let result = await response.json();
+        result = await response.json();
 
         if (result.message === 'success') {
             toast.success('Successfully saved!')
@@ -68,14 +70,23 @@
             <div class="form">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" placeholder="This is a title..." bind:value={title}>
+                {#if result?.errors?.title}
+                <div class="error">{result?.errors?.title[0]}</div>
+                {/if}
 
-                <label for="description">Description</label>
+                <label for="description" class="space">Description</label>
                 <textarea name="description" id="description" placeholder="Describe your offer..." rows="7" bind:value={description}></textarea>
-                
-                <label>
+                {#if result?.errors?.description}
+                <div class="error">{result?.errors?.description[0]}</div>
+                {/if}
+
+                <label class="space">
                     Price: 
                     <input type="number" name="price" id="price" step="0.01" bind:value={price}> $
                 </label>
+                {#if result?.errors?.price}
+                <div class="error">{result?.errors?.price[0]}</div>
+                {/if}
             </div>
         </div>
     </div>
@@ -192,7 +203,6 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
-        margin-bottom: 4rem;
     }
     textarea {
         width: 100%!important;
@@ -203,6 +213,9 @@
     #price {
         width: 5rem;
         font-size: 1rem;
+    }
+    .space {
+        margin-top: 4rem;
     }
 
     .bottombar {
@@ -225,5 +238,10 @@
     }
     .bottombar button:active {
         transform: scale(0.9);
+    }
+
+    .error {
+        font-size: 0.7rem;
+        color: rgb(219, 0, 0);
     }
 </style>
