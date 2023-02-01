@@ -1,1 +1,2 @@
 <h1>About us</h1>
+<p>Bienvenie à notre compagnie! On est la meilleur destination pour recevoir les meileurs offres sur les produits que vous voulez. Nos employés travails fort pour vous donner vos besoins. Sur la page principal, vous allez trouver plusieurs offres, une barre de navigation avec un bouton login, register, un menu principal, une option de créer une offre de vente et votre portefeuille.</p>
