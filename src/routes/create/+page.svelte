@@ -48,7 +48,7 @@
 <div class="container">
     <div class="topbar">
         <h3>Create Offer</h3>
-        <a href="/"><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
+        <a href="/settings/my-offers"><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
     </div>
     <div class="main">
         <div class="view-img">
