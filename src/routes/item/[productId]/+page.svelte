@@ -2,54 +2,48 @@
     export let data;
 </script>
 
-<div class="Homer">
-    <div class="box">
-        <div class="content">
-            <div class="bar">
-                <div class="bart">
-                    <h2>{data.product.title}</h2>
-                    <div class="price">${(data.product.price/100).toFixed(2)}</div>
-                </div>
-                <a href="/user/{data.product.user_id}">
-                    <div class="user">
-                        <h3 class="username">{data.product.username}</h3>
-                        <img class="avatar" src={data.product.avatar} alt="avatar">
-                    </div>
-                </a>
+
+<div class="box">
+    <div class="content">
+        <div class="bar">
+            <div class="bart">
+                <h2>{data.product.title}</h2>
+                <div class="price">${(data.product.price/100).toFixed(2)}</div>
             </div>
-            <div class="main">
-                <div class="view">
-                    <img class="picture" src={data.product.img_base64.img_1} alt="">
+            <a href="/user/{data.product.user_id}">
+                <div class="user">
+                    <h3 class="username">{data.product.username}</h3>
+                    <img class="avatar" src={data.product.avatar} alt="avatar">
                 </div>
-                <div class="description">
-                    <h3>Description:</h3>
-                    <p>{data.product.description}</p>
-                </div>
-            </div>
+            </a>
         </div>
-        <div class="buy">
+        <div class="main">
+            <div class="view">
+                <img class="picture" src={data.product.img_base64} alt="">
+            </div>
+            <div class="description">
+                <h3>Description:</h3>
+                <p>{data.product.description}</p>
+            </div>
         </div>
     </div>
+    <div class="buy">
+    </div>
 </div>
+
 
 <style>
     a {
         text-decoration: none;
         color: rgb(51, 51, 51);
     }
-    .Homer {
+    .box {
         flex: 1;
         display: flex;
-        justify-content: center;
-    }
-    .box {
-
-        display: flex;
-        flex-flow: row wrap;
-        
+        flex-direction: column;
+        max-width: 60rem;
     }
     .bar {
-        max-width: 50rem;
         padding: 1rem;
         display: flex;
         justify-content: space-between;
@@ -81,21 +75,21 @@
     }
 
     .main {
-        max-width: 50rem;
         display: flex;
         flex-direction: column;
     }
     .view {
         flex: 1;
-        min-width: 30rem;
         background-color: aliceblue;
         display: flex;
         height: 20rem;
         justify-content: center;
         align-items: center;
+        aspect-ratio: 16 / 9;
     }
     .picture {
         height: 80%;
+        object-fit: contain;
     }
     .description {
         flex: 0.5;

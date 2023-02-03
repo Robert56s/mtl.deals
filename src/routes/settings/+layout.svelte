@@ -1,5 +1,7 @@
 <script>
-    let current = 'general';
+    import {page} from '$app/stores'
+    
+    let current = $page.url.pathname.substr($page.url.pathname.lastIndexOf('/'))
 </script>
 
 <div class="container">
@@ -10,11 +12,11 @@
     <div class="main">
         <div class="navbar">
             <div class="card">
-                <a href="/settings/general" class:active={current === 'general'} on:click={() => current = 'general'}>General</a>
-                <a href="/settings/my-offers" class:active={current === 'my-offers'} on:click={() => current = 'my-offers'}>Offers</a>
-                <a href="/settings/general" class:active={current === 'security'} on:click={() => current = 'security'}>Make </a>
-                <a href="/settings/general" class:active={current === 'other'} on:click={() => current = 'other'}>Other</a>
-                <a href="/settings/general" class:active={current === 'misc'} on:click={() => current = 'misc'}>Misc</a>
+                <a href="/settings/general" class:active={current === '/general'} on:click={() => current = '/general'}>General</a>
+                <a href="/settings/my-offers" class:active={current === '/my-offers'} on:click={() => current = '/my-offers'}>Offers</a>
+                <a href="/settings/general" class:active={current === '/security'} on:click={() => current = '/security'}>Make </a>
+                <a href="/settings/general" class:active={current === '/other'} on:click={() => current = '/other'}>Other</a>
+                <a href="/settings/general" class:active={current === '/misc'} on:click={() => current = '/misc'}>Misc</a>
             </div>
         </div>
         <div class="content">
