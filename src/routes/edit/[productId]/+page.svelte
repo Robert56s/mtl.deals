@@ -1,12 +1,15 @@
 <script>
     import toast, { Toaster } from 'svelte-french-toast';
-
+    export let data;
+    
     let result;
 
-    let img, fileinput, imgButton, redirect;
+    let fileinput, imgButton, redirect;
 
-    let title, description;
-    let price = 0.01;
+    let img = data.product.img_base64;
+    let title = data.product.title;
+    let description = data.product.description;
+    let price = (data.product.price/100).toFixed(2);
 
 	const onFileSelected = async (e) => {
         imgButton = "on"
@@ -19,14 +22,11 @@
         };
     }
 
-    const saveOffer = async () => {
+    const saveEdit = async () => {
 
-        if (!img) {
-            return toast.error("You forgot to upload a picture")
-        }
-        const response = await fetch('/api/saveoffer', {
+        const response = await fetch('/api/editoffer', {
           method: 'POST',
-          body: JSON.stringify({image: img, title, description, price: price*100}),
+          body: JSON.stringify({image: img, title, description, price: price*100, id: data.product.id}),
           headers: {
             'content-type': 'application/json'
           }
@@ -47,18 +47,14 @@
 <Toaster></Toaster>
 <div class="container">
     <div class="topbar">
-        <h3>Create Offer</h3>
+        <h3>Edit Offer</h3>
         <a href="/settings/my-offers" bind:this={redirect}><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
     </div>
     <div class="main">
         <div class="view-img">
             <h2>Picture</h2>
-            {#if img}
             <img class="img" src="{img}" alt="img">
-            {:else}
-            <img class="img" src="https://cdn.discordapp.com/attachments/828812665232425000/1069399677658726400/white-image.png" alt="img">
-            {/if}
-
+            
             <div class="upload" >
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
@@ -91,7 +87,7 @@
         </div>
     </div>
     <div class="bottombar">
-        <button on:click={saveOffer}>Save</button>
+        <button on:click={saveEdit}>Save</button>
     </div>
 </div>
 

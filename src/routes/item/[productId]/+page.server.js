@@ -1,5 +1,5 @@
 /** @type {import('./$types').PageLoad} */
-export async function load({ locals, params}) {
+export async function load({ locals, params }) {
     
     const getOffer = async (id) => {
         let { data: offers, error: err1 } = await locals.sb
