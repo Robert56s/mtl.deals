@@ -59,7 +59,6 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
                 <input type="file" id="img" name="img" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
-                <button class="saveImg" class:imgButtonActive={imgButton === 'on'} >save avatar</button>
             </div>
         </div>
         <div class="view-info">
@@ -163,18 +162,6 @@
     }
     #img {
         display: none;
-    }
-    .saveImg {
-        visibility: hidden;
-        border-style: none;
-        border-radius: 0.2rem;
-        padding: 0.5rem 1rem;
-        margin: 0.5rem;
-        transition: 0.3s;
-        cursor: pointer;
-    }
-    .imgButtonActive {
-        visibility: visible !important;
     }
     
     .view-info {
