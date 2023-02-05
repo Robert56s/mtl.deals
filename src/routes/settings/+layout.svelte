@@ -13,8 +13,8 @@
         <div class="navbar">
             <div class="card">
                 <a href="/settings/general" class:active={current === '/general'} on:click={() => current = '/general'}>General</a>
-                <a href="/settings/my-offers" class:active={current === '/my-offers'} on:click={() => current = '/my-offers'}>Offers</a>
-                <a href="/settings/general" class:active={current === '/security'} on:click={() => current = '/security'}>Make </a>
+                <a href="/settings/my-offers" class:active={current === '/my-offers'} on:click={() => current = '/my-offers'}>My Offers</a>
+                <a href="/settings/general" class:active={current === '/security'} on:click={() => current = '/security'}>Purchases</a>
                 <a href="/settings/general" class:active={current === '/other'} on:click={() => current = '/other'}>Other</a>
                 <a href="/settings/general" class:active={current === '/misc'} on:click={() => current = '/misc'}>Misc</a>
             </div>
@@ -74,6 +74,7 @@
         background-color: aliceblue;
         border-radius: 0.5rem;
         transition: 0.3s;
+        width: 7rem;
     }
     .card a {
         transition: 0.3s;

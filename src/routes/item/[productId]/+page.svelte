@@ -1,5 +1,6 @@
 <script>
     export let data;
+    let price = 0.01;
 </script>
 
 <div class="container">
@@ -27,7 +28,16 @@
                 </div>
             </div>
         </div>
-        <div class="buy">
+        <div class="bottombar">
+            <form action="" method="post">
+                <label for="price">Enter a bid amount: <b>$</b></label>
+                <input type="number" name="price" id="price" step="0.01" bind:value={price}>
+                <button class="bid">Bid</button>
+            </form>
+            or
+            <button class="buy">
+                Buy
+            </button>
         </div>
     </div>
 </div>
@@ -48,6 +58,7 @@
         max-width: 60rem;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
     }
     .bar {
         padding: 1rem;
@@ -64,6 +75,7 @@
         padding: 0.3rem 1rem;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         background-color: rgb(207, 207, 207);
         border-radius: 1rem;
         transition: 0.3s;
@@ -86,16 +98,16 @@
     }
     .view {
         flex: 1;
-        background-color: aliceblue;
         display: flex;
-        height: 20rem;
         justify-content: center;
         align-items: center;
-        aspect-ratio: 16 / 9;
+        border-style: solid;
+        border-radius: 5px;
     }
     .picture {
-        height: 80%;
         object-fit: contain;
+        aspect-ratio: 16 / 9;
+        width: 50rem;
     }
     .description {
         flex: 0.5;
@@ -105,11 +117,55 @@
         margin-top: 0.5rem;
     }
 
-
-
-    .buy {
-        flex: 1;
-        max-width: 30rem;
-        background-color: brown;
+    .bottombar {
+        justify-self: bottom;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding-bottom: 1rem;
     }
+    .buy, .bid {
+        height: 3rem;
+        display: flex;
+        color: white;
+        padding: 1rem 2rem;
+	  	margin: 1rem;
+	  	background: #058a00;
+        border-style: none;
+	  	border-radius: 10px;
+	  	transition: 0.3s;
+    }
+    .buy:hover, .bid:hover {
+        background: #55c051;
+    }
+    .buy:active, .bid:active {
+        transform: scale(0.9);
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+    }
+    label, input {
+        display: block;
+    }
+
+    label {
+        margin-right: 0.2rem;
+    }
+    b {
+        font-size: 1.3rem;
+    }
+    form input {
+        width: 6rem;
+        max-width: 40rem;
+        font-size: 1rem;
+        padding: 12px 3px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
 </style>
