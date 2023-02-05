@@ -1,5 +1,5 @@
 <script>
-    import toast, { Toaster } from 'svelte-french-toast';
+    import toast from 'svelte-french-toast';
 
     let result;
 
@@ -44,7 +44,6 @@
     }
 </script>
 
-<Toaster></Toaster>
 <div class="container">
     <div class="topbar">
         <h3>Create Offer</h3>
@@ -135,7 +134,6 @@
         align-items: center;
         justify-content: center;
     }
-    
     
     .img {
         margin: 1rem;

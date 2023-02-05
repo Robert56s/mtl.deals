@@ -1,6 +1,8 @@
 <script>
 	export let data;
 
+	import { Toaster } from 'svelte-french-toast';
+
 	import { Shadow } from 'svelte-loading-spinners';
 
 	import { navigating } from '$app/stores'
@@ -21,14 +23,6 @@
 			subscribtion.unsubscribe();
 		};
 	});
-
-	// const submitLogout = async ({ cancel }) => {
-	// 	const { error } = await supabaseClient.auth.signOut();
-	// 	if (error) {
-	// 		console.log(error);
-	// 	}
-	// 	cancel();
-	// }
 </script>
 
 <svelte:head>
@@ -55,6 +49,7 @@
 </svelte:head>
 
 <div class="app">
+	<Toaster></Toaster>
 	<div class="page">
 		<header>
 			<a href="/"><h1>mtl.deals</h1></a>
@@ -63,8 +58,6 @@
 					{#if data.session}
 					<!-- fix this -->
 					<form action="/api/logout" method="POST">
-						<a href="/create" data-sveltekit-prefetch>create</a>
-						<a href="/item/1" data-sveltekit-prefetch>items</a>
 						<a href="/settings" data-sveltekit-prefetch>Settings</a>
 						<button>Logout</button>
 					</form>

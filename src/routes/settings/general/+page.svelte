@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import toast, { Toaster } from 'svelte-french-toast';
+    import toast from 'svelte-french-toast';
     export let data;
     export let form;
 
@@ -47,7 +47,7 @@
     }
 
 </script>
-<Toaster></Toaster>
+
 <div class="user">
     <div class="userAvatar" >
         {#if avatar}

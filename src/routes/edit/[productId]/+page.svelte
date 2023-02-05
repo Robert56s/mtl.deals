@@ -1,5 +1,5 @@
 <script>
-    import toast, { Toaster } from 'svelte-french-toast';
+    import toast from 'svelte-french-toast';
     export let data;
     
     let result;
@@ -44,7 +44,6 @@
     }
 </script>
 
-<Toaster></Toaster>
 <div class="container">
     <div class="topbar">
         <h3>Edit Offer</h3>
