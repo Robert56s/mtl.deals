@@ -170,6 +170,7 @@
     }
     .icons a {
         padding: 1rem;
+        transition: 0.1s;
     }
     .icons a:hover {
         padding: 1rem;

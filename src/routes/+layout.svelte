@@ -1,6 +1,13 @@
 <script>
 	export let data;
 
+	import { Shadow } from 'svelte-loading-spinners';
+
+	import { navigating } from '$app/stores'
+	import { loading } from '$lib/loading'
+
+	$: $loading = !!$navigating
+
 	import { invalidate } from "$app/navigation";
 	import { supabaseClient } from "$lib/supabase";
 	import { onMount } from 'svelte';
@@ -69,7 +76,11 @@
 			</nav>
 		</header>
 		<main>
-			
+			{#if $loading}
+				<div class="loading">
+					<Shadow size="20" color="#000000" unit="px" duration="0.8s"/>
+				</div>	
+			{/if}
 			<slot></slot>
 		</main>
 	</div>
@@ -80,7 +91,7 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
-	}
+	}	
 	main {
 		flex: 1;
 		display:flex;
@@ -149,4 +160,10 @@
   		opacity: 0.6;
   		cursor: not-allowed;
 	} */
+
+	.loading {
+		position: fixed;
+		bottom: 3rem;
+		right: 3rem;
+	}
 </style>

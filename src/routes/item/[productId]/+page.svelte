@@ -2,32 +2,33 @@
     export let data;
 </script>
 
-
-<div class="box">
-    <div class="content">
-        <div class="bar">
-            <div class="bart">
-                <h2>{data.product.title}</h2>
-                <div class="price">${(data.product.price/100).toFixed(2)}</div>
-            </div>
-            <a href="/user/{data.product.user_id}">
-                <div class="user">
-                    <h3 class="username">{data.product.username}</h3>
-                    <img class="avatar" src={data.product.avatar} alt="avatar">
+<div class="container">
+    <div class="box">
+        <div class="content">
+            <div class="bar">
+                <div class="bart">
+                    <h2>{data.product.title}</h2>
+                    <div class="price">${(data.product.price/100).toFixed(2)}</div>
                 </div>
-            </a>
-        </div>
-        <div class="main">
-            <div class="view">
-                <img class="picture" src={data.product.img_base64} alt="">
+                <a href="/user/{data.product.user_id}">
+                    <div class="user">
+                        <h3 class="username">{data.product.username}</h3>
+                        <img class="avatar" src={data.product.avatar} alt="avatar">
+                    </div>
+                </a>
             </div>
-            <div class="description">
-                <h3>Description:</h3>
-                <p>{data.product.description}</p>
+            <div class="main">
+                <div class="view">
+                    <img class="picture" src={data.product.img_base64} alt="">
+                </div>
+                <div class="description">
+                    <h3>Description:</h3>
+                    <p>{data.product.description}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="buy">
+        <div class="buy">
+        </div>
     </div>
 </div>
 
@@ -37,11 +38,16 @@
         text-decoration: none;
         color: rgb(51, 51, 51);
     }
-    .box {
+    .container {
         flex: 1;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
+    }
+    .box {
+        flex: 1;
         max-width: 60rem;
+        display: flex;
+        flex-direction: column;
     }
     .bar {
         padding: 1rem;
