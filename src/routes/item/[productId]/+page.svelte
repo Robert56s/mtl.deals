@@ -31,6 +31,7 @@
         <div class="bottombar">
             <form action="" method="post">
                 <label for="price">Enter a bid amount: <b>$</b></label>
+                <input type="itemId" name="itemId" style="display: none;" bind:value={data.product.id}>
                 <input type="number" name="price" id="price" step="0.01" bind:value={price}>
                 <button class="bid">Bid</button>
             </form>
