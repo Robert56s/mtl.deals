@@ -90,7 +90,7 @@
 	  	transition: 0.3s;
     }
     .bar a:hover {
-        background: #dadada;
+        background: #e2e2e2;
     }
     .bar a:active {
         transform: scale(0.9);
@@ -112,7 +112,7 @@
         transition: 0.2s;
     }
     .card:hover {
-        background-color: rgb(219, 219, 219);
+        background-color: rgb(235, 235, 235);
     }
     
     .main {
@@ -174,7 +174,7 @@
     }
     .icons a:hover {
         padding: 1rem;
-        background-color: #858585;
+        background-color: #bdbdbd;
         border-radius: 5px;
     }
     .icons img {

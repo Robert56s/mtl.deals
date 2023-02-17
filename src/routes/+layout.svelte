@@ -63,8 +63,8 @@
 						<button>Logout</button>
 					</form>
 					{:else}
-					<a href="/login" class="login" data-sveltekit-prefetch> Login </a>
-					<a href="/register" data-sveltekit-prefetch> Register </a>
+					<a href="/login" class="login" data-sveltekit-prefetch>Login</a>
+					<a href="/register" data-sveltekit-prefetch>Register</a>
 					{/if}
 				</div>
 			</nav>
