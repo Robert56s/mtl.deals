@@ -1,6 +1,8 @@
 <script>
     export let data;
     let price = 0.01;
+
+    const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
 </script>
 
 <div class="container">
@@ -9,7 +11,7 @@
             <div class="bar">
                 <div class="bart">
                     <h2>{data.product.title}</h2>
-                    <div class="price">${(data.product.price/100).toFixed(2)}</div>
+                    <div class="price">{formatter.format((data.product.price/100))}</div>
                 </div>
                 <a href="/user/{data.product.user_id}">
                     <div class="user">

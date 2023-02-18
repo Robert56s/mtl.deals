@@ -2,7 +2,7 @@
     import toast from 'svelte-french-toast';
     export let data;
 
-
+    const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
     
     const handleDelete = async (id) => {
         
@@ -48,7 +48,7 @@
                                 {product.title}
                             </div>
                             <div class="price">
-                                $ {(product.price/100).toFixed(2)}
+                                {formatter.format((product.price/100))}
                             </div>
                         </div>
                         <div class="bottom">
@@ -61,7 +61,8 @@
                         </a>
                         <!-- svelte-ignore a11y-missing-attribute -->
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <a on:click={handleDelete(product.id)}>
+                        <!-- svelte-ignore a11y-invalid-attribute -->
+                        <a href="#" on:click={handleDelete(product.id)}>
                             <img src="https://cdn.discordapp.com/attachments/828812665232425000/1071303152583856148/3405244.png" alt="">
                         </a>
                     </div>

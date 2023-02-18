@@ -10,6 +10,6 @@ export const load = async ({ locals }) => {
     }
 
     return {
-       products: getOffers(),
+       products: getOffers()
     }
 }

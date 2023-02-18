@@ -1,5 +1,7 @@
 <script>
     export let data;
+
+    const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
 </script>
 
 <div class="main">
@@ -16,7 +18,7 @@
                             {product.title}
                         </p>
                         <p class="price">
-                            $ {(product.price/100).toFixed(2)}
+                            {formatter.format((product.price/100))}
                         </p>
                     </div>
                 </div>
