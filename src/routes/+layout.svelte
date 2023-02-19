@@ -99,7 +99,7 @@
 		height: 3.5rem;
 	  	justify-content: space-between;
 	  	align-items: center;
-	  	background: #242729;
+	  	background: rgba(0, 0, 0, 0.849);
 		box-shadow: rgba(25, 25, 25, 0.5) 0px 0px 5px;
 	}
 

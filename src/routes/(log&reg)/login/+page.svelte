@@ -31,9 +31,11 @@
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #ccc;
+        border: 1px solid rgba(97, 97, 97, 0.753);
         border-radius: 4px;
         box-sizing: border-box;
+        background-color: rgba(12, 30, 65, 0.486);
+        color: white;
     }
     
     form {
@@ -63,27 +65,28 @@
         transition: 0.3s;
     }
     .buttons a:hover {
-        background-color: rgb(207, 207, 207);
+        background-color: rgba(207, 207, 207, 0.233);
     }
     .activeButton {
-        background-color: rgb(185, 185, 185) !important;
+        background-color: rgba(131, 132, 187, 0.733) !important;
     }
     hr {
         border: 0.05rem solid black;
     }
     button {
         margin-top: 1rem;
-        background: rgb(120, 121, 121);
+        background: #004974de;
         display: flex;
-        padding: 0.5rem 1rem;
+        padding: 0.7rem 1.2rem;
         align-self: center;
         opacity: 1;
         transition: 0.3s;
         border: none;
         border-radius: 5px;
+        color: white;
     }
     button:hover {
-        background: rgb(165, 165, 165);
+        background: #006594e0;
     }
     button:active {
         transform: scale(0.9);
