@@ -1,5 +1,7 @@
 <script>
 	export let data;
+    //https://codepen.io/AlaDyn172/pen/ZMeraJ
+	import menu from "$lib/assets/menu.png";
 
 	import { Toaster } from 'svelte-french-toast';
 
@@ -53,21 +55,25 @@
 	<div class="page">
 		<header>
 			<a href="/"><h1>mtl.deals</h1></a>
+			{#if data.session}
+			<div class="wallet">
+				<div class="cob"></div>
+				<img src="" alt="" class="walletIcon">
+			</div>
 			<nav class="buttons">
 				<div class="ul">
-					{#if data.session}
-					<!-- fix this -->
-					<form action="/api/logout" method="POST">
-						<a href="/about" data-sveltekit-prefetch>about</a>
-						<a href="/settings" data-sveltekit-prefetch>Settings</a>
-						<button>Logout</button>
-					</form>
-					{:else}
+					<a href="/settings" id="aMenu">
+						<img class="menu" src={menu} alt="menuIcon">
+					</a>
+			</nav>
+			{:else}
+			<nav class="buttons">
+				<div class="ul">
 					<a href="/login" class="login" data-sveltekit-prefetch>Login</a>
 					<a href="/register" data-sveltekit-prefetch>Register</a>
-					{/if}
 				</div>
 			</nav>
+			{/if}
 		</header>
 		<main>
 			{#if $loading}
@@ -159,5 +165,15 @@
 		position: fixed;
 		bottom: 3rem;
 		right: 3rem;
+	}
+
+	.menu {
+		aspect-ratio: 1/1;
+		height: 50px;
+	}
+	#aMenu {
+		background-color: rgba(128, 128, 128, 0);
+		padding: 0rem;
+		margin-inline: 1rem;
 	}
 </style>

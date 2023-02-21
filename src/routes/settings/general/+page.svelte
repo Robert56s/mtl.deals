@@ -79,10 +79,16 @@
                 <input readonly name="email" type="email" value="{data.session.user.email}">
             </label>
         </div>
+        <form action="/api/logout" method="POST">
+            <button class="logout">Logout</button>
+        </form>
     </div>
 </div>
 
 <style>
+    .logout {
+        visibility: visible !important;
+    }
     .user {
         display: flex;
         justify-content:space-around

@@ -34,10 +34,11 @@
         border: 1px solid rgba(97, 97, 97, 0.753);
         border-radius: 4px;
         box-sizing: border-box;
-        background-color: rgba(12, 30, 65, 0.486);
-        color: white;
+        background-color: rgb(255, 255, 255);
     }
-    
+    hr {
+        border: 0.1rem solid rgb(65, 65, 141) !important;
+    }
     form {
         flex: 1;
         padding-inline: 2rem;

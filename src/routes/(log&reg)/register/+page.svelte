@@ -69,11 +69,14 @@
         border: 1px solid rgba(97, 97, 97, 0.753);
         border-radius: 4px;
         box-sizing: border-box;
-        background-color: rgba(12, 30, 65, 0.486);
+        background-color: rgb(255, 255, 255);
         color: white;
     }
     input.checkbox {
         width: auto;
+    }
+    hr {
+        border: 0.1rem solid rgb(65, 65, 141) !important;
     }
     
     form {
