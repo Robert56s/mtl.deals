@@ -85,6 +85,7 @@
         border: none;
         border-radius: 5px;
         color: white;
+        cursor: pointer;
     }
     button:hover {
         background: #006594e0;

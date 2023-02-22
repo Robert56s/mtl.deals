@@ -47,48 +47,80 @@
     }
 
 </script>
+<div class="block">
 
-<div class="user">
-    <div class="userAvatar" >
-        {#if avatar}
-        <img class="avatar" src="{avatar}" alt="avatar">
-        {:else}
-        <img class="avatar" src="{data.avatar}" alt="avatar">
-        {/if}
-        <div class="upload" >
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
-            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
-            <button class="saveAvatar" class:avatarButtonActive={avatarButton === 'on'} on:click={saveAvatar}>save avatar</button>
-            
+    <div class="user">
+        <div class="userAvatar" >
+            {#if avatar}
+            <img class="avatar" src="{avatar}" alt="avatar">
+            {:else}
+            <img class="avatar" src="{data.avatar}" alt="avatar">
+            {/if}
+            <div class="upload" >
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
+                <button class="saveAvatar" class:avatarButtonActive={avatarButton === 'on'} on:click={saveAvatar}>save avatar</button>
+                
+            </div>
+        </div>
+        <div class="userInfo">
+            <h1>User Info</h1>
+            <form action="?/accupdate" method="post">
+                <label for="username">
+                    <div>username</div>
+                    <input name="username" type="username" value="{data.username}" on:input={() => {usernameButton = 'on'}}>
+                    <img class="editIcon" src="https://cdn.discordapp.com/attachments/828812665232425000/1060304137037807736/Edit_icon_the_Noun_Project_30184.svg.png" alt="edit icon">
+                </label>
+                <button class:usernameButtonActive={usernameButton === 'on'}>save</button>
+            </form>
+            <div class="email">
+                <label for="email">
+                    <div>email</div>
+                    <input readonly name="email" type="email" value="{data.session.user.email}">
+                </label>
+            </div>
         </div>
     </div>
-    <div class="userInfo">
-        <h1>User Info</h1>
-        <form action="?/accupdate" method="post">
-            <label for="username">
-                <div>username</div>
-                <input name="username" type="username" value="{data.username}" on:input={() => {usernameButton = 'on'}}>
-                <img class="editIcon" src="https://cdn.discordapp.com/attachments/828812665232425000/1060304137037807736/Edit_icon_the_Noun_Project_30184.svg.png" alt="edit icon">
-            </label>
-            <button class:usernameButtonActive={usernameButton === 'on'}>save</button>
-        </form>
-        <div class="email">
-            <label for="email">
-                <div>email</div>
-                <input readonly name="email" type="email" value="{data.session.user.email}">
-            </label>
-        </div>
-        <form action="/api/logout" method="POST">
-            <button class="logout">Logout</button>
+    <div class="bottom">
+        <form action="/api/logout" method="post">
+            <button class="logout">
+                Logout
+            </button>
         </form>
     </div>
 </div>
 
 <style>
-    .logout {
-        visibility: visible !important;
+    .block {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
+    .bottom {
+        display: flex;
+        justify-content: right;
+        padding: 2rem;
+    }
+    .logout {
+        color: inherit;
+        border: 3px solid rgb(255, 146, 146);
+        padding: 0.7rem 1.3rem;
+        font: inherit;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        background-color:aliceblue;
+        transition: 0.3s;
+    }
+    .logout:hover {
+        background-color: rgb(225, 232, 238);
+        border: 3px solid rgb(255, 111, 111);
+    }
+    .logout:active {
+        transform: scale(0.98);
+    }
+
     .user {
         display: flex;
         justify-content:space-around

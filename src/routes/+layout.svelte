@@ -56,10 +56,15 @@
 		<header>
 			<a href="/"><h1>mtl.deals</h1></a>
 			{#if data.session}
-			<div class="wallet">
-				<div class="cob"></div>
-				<img src="" alt="" class="walletIcon">
-			</div>
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<a href="#" style="visibility: none; height: 100%;">
+				<div class="wallet">
+					<div class="inside">
+						<div class="cob">100,03 $</div>
+						<img src="" alt="" class="walletIcon">
+					</div>
+				</div>
+			</a>
 			<nav class="buttons">
 				<div class="ul">
 					<a href="/settings" id="aMenu">
@@ -87,6 +92,20 @@
 </div>
 
 <style>
+	.wallet {
+		display: flex;
+		width: 15rem;
+		height: 100%;
+		background-color: #4CAF50;
+		justify-self: center;
+		border-radius: 1rem;
+		align-items: center;
+	}
+	.inside {
+		display: flex;
+		background-color: #43494d;
+	}
+
 	.page {
 		display: flex;
 		flex-direction: column;
@@ -143,7 +162,7 @@
 	  	transform: scale(0.9);
 	}
 
-	button {
+	/* button {
 		background-color: #4CAF50;
 		border-style: none;
 		border-radius: 5px;
@@ -152,7 +171,7 @@
 
 	button:hover {
 		background-color: #78af79;
-	}
+	} */
 
 
 	/* //disabled button class

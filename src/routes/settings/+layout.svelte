@@ -84,7 +84,7 @@
     }
     .card a:hover {
         color: rgb(80, 80, 80);
-        background-color: rgb(189, 189, 189);
+        background-color: rgb(224, 224, 224);
         
     }
     .content {
@@ -97,7 +97,7 @@
     }
     .active { 
         color: rgb(80, 80, 80) !important; 
-        background-color: rgb(189, 189, 189);
+        background-color: rgb(189, 189, 189) !important;
         
     }
 </style>
