@@ -1,7 +1,6 @@
 <script>
 	export let data;
     //https://codepen.io/AlaDyn172/pen/ZMeraJ
-	import menu from "$lib/assets/menu.png";
 
 	import { Toaster } from 'svelte-french-toast';
 
@@ -68,7 +67,7 @@
 			<nav class="buttons">
 				<div class="ul">
 					<a href="/settings" id="aMenu">
-						<img class="menu" src={menu} alt="menuIcon">
+						<img class="menu" src="https://cdn.discordapp.com/attachments/828812665232425000/1078114678368108604/Pngtreeuser_icon_4479727.png" alt="menuIcon">
 					</a>
 			</nav>
 			{:else}

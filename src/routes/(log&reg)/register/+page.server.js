@@ -2,6 +2,7 @@ import "$lib/supabase"
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail } from '@sveltejs/kit';
 import { z } from 'zod';
+import { LTC_WALLET_ID, CALLBACK_KEY} from "$env/static/public"
 
 const registerSchema = z.object({
     username: z
@@ -27,6 +28,32 @@ const registerSchema = z.object({
     tos: z
         .enum(['on'], { required_error: 'You must accept the terms and conditions' })
 })
+
+const getAddy = async (locals) => {
+    const response = await fetch(`https://apirone.com/api/v2/wallets/${LTC_WALLET_ID}/addresses`, {
+        method: 'POST',
+        header:{
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({
+            "addr-type": "p2sh-p2wpkh",
+            "callback": {
+                "method": "POST",
+                "url": `https://mtldotdeals.loca.lt/api/get-ltc-addy`,
+                "data": {
+                    "key": `${CALLBACK_KEY}`,
+                    "user_id": `${locals.session.user.id}`
+                }
+            }
+        })
+    })
+
+    const responseData = await response.json();
+    
+    
+
+
+}
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -64,7 +91,7 @@ export const actions = {
             }
         })
 
-        console.log(err)
+        
         
         if (err) {
             if (err instanceof AuthApiError && err.status === 400) {
@@ -78,6 +105,7 @@ export const actions = {
                 errorSupabase: "Server error. Please try again later."
             })
         } else {
+            await getAddy(locals)
             let success = true
             return { success }
         }
