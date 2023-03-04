@@ -2,7 +2,7 @@ export const POST = async ({ request, locals }) => {
 
     const body = await request.json();
         
-    const { data, error:err } = await locals.sb
+    const { data, error:err } = await locals.sbs
         .from('offers')
         .delete()
         .eq('id', body.id)

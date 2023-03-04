@@ -31,7 +31,7 @@ export const POST = async ({ request, locals }) => {
     }
 
     
-    const { data, error } = await locals.sb
+    const { data, error } = await locals.sbs
         .from('offers')
         .update({ img_base64: body.image, title: body.title, description: body.description, price: body.price })
         .eq('id', body.id)

@@ -30,7 +30,7 @@ export const POST = async ({ request, locals }) => {
         return new Response(JSON.stringify({ data: body, errors, message: "error"}));
     }
 
-    const { data, error: errr } = await locals.sb
+    const { data, error: errr } = await locals.sbs
         .from('offers')
         .insert([{ user_id: locals.session.user.id, price: body.price, title: body.title, description: body.description, img_base64: body.image },])
 

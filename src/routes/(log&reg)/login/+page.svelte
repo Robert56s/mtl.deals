@@ -35,6 +35,7 @@
         border-radius: 4px;
         box-sizing: border-box;
         background-color: rgb(255, 255, 255);
+        color: black;
     }
     hr {
         border: 0.1rem solid rgb(65, 65, 141) !important;

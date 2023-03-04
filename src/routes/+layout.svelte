@@ -1,5 +1,6 @@
 <script>
 	export let data;
+	// console.log(data)
     //https://codepen.io/AlaDyn172/pen/ZMeraJ
 
 	import { Toaster } from 'svelte-french-toast';
@@ -15,12 +16,22 @@
 	import { supabaseClient } from "$lib/supabase";
 	import { onMount } from 'svelte';
 
+	import { io } from 'socket.io-client'
+
+	const socket = io()
+
+	socket.on('eventFromServer', (message) => {
+		console.log(message)
+	})
+  
 	onMount(() => {
+
 		const subscribtion = supabaseClient.auth.onAuthStateChange(() => {
 			invalidate('supabase:auth');
 		});
 
 		return () => {
+			priceChange.unsubscribe();
 			subscribtion.unsubscribe();
 		};
 	});
@@ -59,7 +70,7 @@
 			<a href="#" style="visibility: none; height: 100%;">
 				<div class="wallet">
 					<div class="inside">
-						<div class="cob">100,03 $</div>
+						<div class="cob">{data.money.ltc}</div>
 						<img src="" alt="" class="walletIcon">
 					</div>
 				</div>

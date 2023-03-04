@@ -2,7 +2,7 @@
 export async function load({ locals }) {
 
     const getUsername = async () => {
-        let { data: username, error } = await locals.sb
+        let { data: username, error } = await locals.sbs
         .from('profiles')
         .select('username')
         .eq('id', locals.session.user.id)
@@ -14,7 +14,7 @@ export async function load({ locals }) {
 
     const getAvatar = async () => {
         
-        let { data: avatar, error } = await locals.sb
+        let { data: avatar, error } = await locals.sbs
             .from('profiles')
             .select('avatar_base64')
             .eq('id', locals.session.user.id)
@@ -38,7 +38,7 @@ export const actions = {
         //convert form entries data to an object
         const body = Object.fromEntries(await request.formData())
         
-        const { data, error: err } = await locals.sb
+        const { data, error: err } = await locals.sbs
         .from('profiles')
         .update({ username: body.username })
         .eq('id', locals.session.user.id)

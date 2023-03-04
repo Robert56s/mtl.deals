@@ -70,7 +70,7 @@
         border-radius: 4px;
         box-sizing: border-box;
         background-color: rgb(255, 255, 255);
-        color: white;
+        color: rgb(0, 0, 0);
     }
     input.checkbox {
         width: auto;
