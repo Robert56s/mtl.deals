@@ -18,7 +18,9 @@
 
         console.log(result)
 
-        if (result.message === 'success') {
+        if (result.message === 'success', {
+            
+        }) {
             toast.success('Successfully deleted!')
             location.reload() 
         } else {

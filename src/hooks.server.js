@@ -1,6 +1,9 @@
 import "$lib/supabase"
 import { getSupabase } from "@supabase/auth-helpers-sveltekit"
 import { getServiceSupabase } from '$lib/servicerole';
+import { start_server } from '$lib/server';
+
+start_server();
 
 export const handle = async ({ event, resolve }) => {
     // Stage 1

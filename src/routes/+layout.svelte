@@ -18,7 +18,7 @@
 
 	import { io } from 'socket.io-client'
 
-	const socket = io()
+	const socket = io('http://localhost:8080')
 
 	socket.on('eventFromServer', (message) => {
 		console.log(message)
@@ -70,7 +70,7 @@
 			<a href="#" style="visibility: none; height: 100%;">
 				<div class="wallet">
 					<div class="inside">
-						<div class="cob">{data.money.ltc}</div>
+						<div class="cob">{data?.money.ltc}</div>
 						<img src="" alt="" class="walletIcon">
 					</div>
 				</div>
