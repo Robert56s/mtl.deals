@@ -35,7 +35,9 @@
         result = await response.json();
 
         if (result.message === 'success') {
-            toast.success('Successfully saved!')
+            toast.success('Successfully saved!', {
+                style: 'background: #333; color: #fff; margin-top: 50px',
+            })
             redirect.click()
         } else {
             toast.error("This didn't work.")

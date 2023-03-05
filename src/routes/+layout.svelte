@@ -31,10 +31,11 @@
 		});
 
 		return () => {
-			priceChange.unsubscribe();
 			subscribtion.unsubscribe();
 		};
 	});
+
+	const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 2});
 </script>
 
 <svelte:head>
@@ -66,21 +67,23 @@
 		<header>
 			<a href="/"><h1>mtl.deals</h1></a>
 			{#if data.session}
-			<!-- svelte-ignore a11y-invalid-attribute -->
-			<a href="#" style="visibility: none; height: 100%;">
-				<div class="wallet">
-					<div class="inside">
-						<div class="cob">{data?.money.ltc}</div>
-						<img src="" alt="" class="walletIcon">
+			<div class="right">
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a href="#" style="visibility: none; height: 100%; display: flex; align-items: center;">
+					<div class="wallet">
+						<div class="inside">
+							<img src="https://cdn.discordapp.com/attachments/828812665232425000/1081777423135277136/image.png" alt="" class="walletIcon">
+							<div class="cob">{formatter.format(data?.money.ltc)}</div>
+						</div>
 					</div>
-				</div>
-			</a>
-			<nav class="buttons">
-				<div class="ul">
-					<a href="/settings" id="aMenu">
-						<img class="menu" src="https://cdn.discordapp.com/attachments/828812665232425000/1078114678368108604/Pngtreeuser_icon_4479727.png" alt="menuIcon">
-					</a>
-			</nav>
+				</a>
+				
+				<a href="/settings" id="aMenu">
+					<img class="menu" src="https://cdn.discordapp.com/attachments/828812665232425000/1078114678368108604/Pngtreeuser_icon_4479727.png" alt="menuIcon">
+				</a>
+
+			</div>
+			
 			{:else}
 			<nav class="buttons">
 				<div class="ul">
@@ -102,18 +105,40 @@
 </div>
 
 <style>
+
+	.right {
+		display: flex;
+		align-items: center;
+	}
+
+	.inside {
+		flex: 1;
+		display: flex;
+		margin-inline: 0.5rem;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.walletIcon {
+		aspect-ratio: 1/1;
+		height: 1.5rem;
+		margin-right: 0.8rem;
+	}
+
 	.wallet {
 		display: flex;
-		width: 15rem;
-		height: 100%;
-		background-color: #4CAF50;
+		width: 8rem;
+		height: 2.5rem;
+		background: rgb(42,111,150);
+		background: radial-gradient(circle, rgba(42,111,150,1) 38%, rgba(0,73,116,1) 100%); 
 		justify-self: center;
-		border-radius: 1rem;
+		border-radius: 0.3rem;
+		border-style: solid;
+		border-color: #004974;
 		align-items: center;
 	}
 	.inside {
 		display: flex;
-		background-color: #43494d;
 	}
 
 	.page {
@@ -204,5 +229,6 @@
 		background-color: rgba(128, 128, 128, 0);
 		padding: 0rem;
 		margin-inline: 1rem;
+		justify-self: right !important;
 	}
 </style>
