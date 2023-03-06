@@ -3,7 +3,7 @@
 	// console.log(data)
     //https://codepen.io/AlaDyn172/pen/ZMeraJ
 
-	import { Toaster } from 'svelte-french-toast';
+	import toast,{ Toaster } from 'svelte-french-toast';
 
 	import { Shadow } from 'svelte-loading-spinners';
 
@@ -17,14 +17,40 @@
 	import { onMount } from 'svelte';
 
 	import { io } from 'socket.io-client'
+	
+		
+	let money = (data.money?.ltc/100000000)*data.ltcPrice
 
-	const socket = io('http://localhost:8080')
+	$: money
+	
 
-	socket.on('eventFromServer', (message) => {
-		console.log(message)
-	})
-  
 	onMount(() => {
+		if (data.session) {
+			
+			const socket = io('http://localhost:8080')
+		
+			socket.on('eventFromServer', (message) => {
+				console.log(message)
+			})
+		
+			socket.on('conf', (body) => {
+				if (body.conf == 0 && body.user_id == data.session.user.id) {
+					toast(`${body.amount*data.ltcPrice} $ received, waiting for confirmation`, {
+						icon: '💰',
+					})
+					console.log("0 conf hit client")
+				} else if (body.conf == 1 && body.user_id == data.session.user.id){
+					toast(`${body.amount*data.ltcPrice} $ was added to your balance`, {
+						icon: '💰',
+					})
+					console.log("1 conf hit server")
+					money += ((body.amount/100000000)*data.ltcPrice)
+				}
+			})
+			
+		}
+		
+
 
 		const subscribtion = supabaseClient.auth.onAuthStateChange(() => {
 			invalidate('supabase:auth');
@@ -73,7 +99,7 @@
 					<div class="wallet">
 						<div class="inside">
 							<img src="https://cdn.discordapp.com/attachments/828812665232425000/1081777423135277136/image.png" alt="" class="walletIcon">
-							<div class="cob">{formatter.format(data?.money.ltc)}</div>
+							<div class="cob">{formatter.format(money)}</div>
 						</div>
 					</div>
 				</a>

@@ -25,29 +25,46 @@ export const start_server = () => {
     })
 
     app.post('/api/ltc-callbacks', (req, res) => {
-        let data = JSON.stringify(req.body);
+        let data = JSON.parse(JSON.stringify(req.body));
         console.log(data)
         res.setHeader('content-type', 'text/plain');
 
-        if (data.data?.key !== 'SECRET_CALLBACK_KEY') {
+        if (data.data?.key !== SECRET_CALLBACK_KEY) {
             res.status(401);
             res.send('Unauthorized')
+            return
         }
 
         const body = {
-            user_id: data.data.user_id,
-            amount: data.destinations[0].amount,
-            th: data.input_transaction_hash
+            user_id: data.data?.user_id,
+            amount: data.value,
+            th: data.input_transaction_hash,
+            conf: data.confirmations
         }
 
-        if (data.confirmations == 0) {
+        if (data.confirmations === 0) {
             res.status(201);
             res.send('0 conf Data Received: ' + data);
             io.on('connection', (socket) => {
-                socket.emit('conf', 'Hello, World 👋')
+                socket.emit('conf', body)
+                console.log("0 conf hit server")
             })
-        } else if (data.confirmations == 1) {
+            return
+
+        } else if (data.confirmations === 1) {
+            res.status(200);
             res.send('1 conf Data Received: ' + data)
+            io.on('connection', (socket) => {
+                socket.emit('conf', body)
+                console.log("1 conf hit server")
+            })
+            return
+
+        } else if (data.confirmations > 1) {
+            res.status(200);
+            res.send('we good')
+            console.log('we good')
+            return
         }
 
     })

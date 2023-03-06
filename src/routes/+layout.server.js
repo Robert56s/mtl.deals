@@ -5,7 +5,7 @@ import axios from 'axios';
 const getAddy = async (event) => {
     // const response = await fetch(`https://apirone.com/api/v2/wallets/${SECRET_LTC_WALLET_ID}/addresses`, {
     //     method: 'POST',
-    //     header:{
+    //     headers:{
     //         'Content-Type': 'application/json'
     //     },
     //     body: JSON.stringify({
@@ -28,7 +28,7 @@ const getAddy = async (event) => {
         "addr-type": "p2sh-p2wpkh",
         "callback": {
             "method": "POST",
-            "url": `https://b93b-69-156-27-138.ngrok.io/api/ltc-callbacks`,
+            "url": `https://f42c-69-156-27-138.ngrok.io/api/ltc-callbacks`,
             "data": {
                 "key": `${SECRET_CALLBACK_KEY}`,
                 "user_id": `${event.locals.session.user.id}`,
@@ -79,9 +79,24 @@ export const load = async (event) => {
             
         }
     }
+
+    const getLtcPrice = async () => {
+        if(session) {
+            let responce = await fetch('https://min-api.cryptocompare.com/data/price?fsym=LTC&tsyms=USD', {
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+
+            let responceData = await responce.json()
+            return responceData.USD
+        }
+    }
     
     return {
         session: session,
-        money: await getMoney()
+        money: await getMoney(),
+        ltcPrice: await getLtcPrice()
     }
 }
