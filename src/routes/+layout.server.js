@@ -28,7 +28,7 @@ const getAddy = async (event) => {
         "addr-type": "p2sh-p2wpkh",
         "callback": {
             "method": "POST",
-            "url": `https://f42c-69-156-27-138.ngrok.io/api/ltc-callbacks`,
+            "url": `https://8185-69-156-27-138.ngrok.io/api/ltc-callbacks`,
             "data": {
                 "key": `${SECRET_CALLBACK_KEY}`,
                 "user_id": `${event.locals.session.user.id}`,

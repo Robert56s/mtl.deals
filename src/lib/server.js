@@ -17,13 +17,6 @@ export const start_server = () => {
         }
     })
 
-    io.on('connection', (socket) => {
-        const world = () => {
-            socket.emit('eventFromServer', 'Hello, World 👋')
-        }
-        world()
-    })
-
     app.post('/api/ltc-callbacks', (req, res) => {
         let data = JSON.parse(JSON.stringify(req.body));
         console.log(data)
@@ -62,7 +55,7 @@ export const start_server = () => {
 
         } else if (data.confirmations > 1) {
             res.status(200);
-            res.send('we good')
+            res.send('*ok*')
             console.log('we good')
             return
         }
