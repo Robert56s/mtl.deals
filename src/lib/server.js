@@ -13,9 +13,22 @@ export const start_server = () => {
     const server = createServer(app)
     const io = new Server(server, {
         cors: {
-            origin: 'http://localhost:5173'
+            origin: '*' //a changer en prod
         }
     })
+
+    io.on('connection', function(socket) {
+        // Use socket to communicate with this particular client only, sending it it's own id
+        socket.emit('eventFromServer', { message: 'Welcome!', id: socket.id });
+
+    });
+
+    function sendTime() {
+        console.log('time send')
+        io.emit('time', { time: new Date().toJSON() });
+    }
+
+    setTimeout(sendTime, 10000);
 
     app.post('/api/ltc-callbacks', (req, res) => {
         let data = JSON.parse(JSON.stringify(req.body));
@@ -38,19 +51,13 @@ export const start_server = () => {
         if (data.confirmations === 0) {
             res.status(201);
             res.send('0 conf Data Received: ' + data);
-            io.on('connection', (socket) => {
-                socket.emit('conf', body)
-                console.log("0 conf hit server")
-            })
+            io.emit('conf', body)
             return
 
         } else if (data.confirmations === 1) {
             res.status(200);
             res.send('1 conf Data Received: ' + data)
-            io.on('connection', (socket) => {
-                socket.emit('conf', body)
-                console.log("1 conf hit server")
-            })
+            io.emit('conf', body)
             return
 
         } else if (data.confirmations > 1) {

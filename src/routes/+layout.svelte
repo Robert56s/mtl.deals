@@ -27,9 +27,13 @@
 	onMount(() => {
 		if (data.session) {
 			
-			const socket = io('http://localhost:8080')
+			const socket = io('https://robert56s-vigilant-space-trout-gprqg9v7p7qhv47j-8080.preview.app.github.dev')
 		
 			socket.on('eventFromServer', (message) => {
+				console.log(message)
+			})
+
+			socket.on('time', (message) => {
 				console.log(message)
 			})
 		
