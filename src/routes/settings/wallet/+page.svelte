@@ -3,7 +3,11 @@
     export let data;
 
     let withAmt = data.money.ltc/100000000
+    let withAddy;
     let withErr = false
+
+    
+    const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 2});
 
     const copyAddy = () => {
         // Get the text field
@@ -23,7 +27,7 @@
     const withdrawLtc = async () => {
         const response = await fetch('/api/withdraw', {
           method: 'POST',
-          body: JSON.stringify({withAmt}),
+          body: JSON.stringify({withAmt: (withAmt*100000000), withAddy}),
           headers: {
             'content-type': 'application/json'
           }
@@ -34,6 +38,9 @@
 
         if (result.message === "success") {
             withErr = false
+            toast(`You withdrew ${formatter.format((data.money.ltc/100000000)*data.ltcPrice)}`, {
+				icon: '💸',
+			})
         } else if (result.err == true) {
             withErr = result.message
         }
@@ -55,13 +62,16 @@
     <div class="amountContainer">
         Amount in your Wallet:
         <div class="amout">
-            <input readonly type="number" class="ltc" value="{data.money.ltc/100000000}">
+            <input readonly type="text" class="ltc" value="{data.money.ltc/100000000}">
         </div>
     </div>
     <hr>
     <div class="withdraw">
         Withdraw Litcoin
         <img src="https://cdn.discordapp.com/attachments/828812665232425000/1084222672973594634/LTC-logo.png" alt="Litecoin Logo" class="ltcLogo">
+    </div>
+    <div class="withAddyContainer">
+        <input type="text" class="withAddy" placeholder="Litecoin Address" bind:value={withAddy}>
     </div>
     <div class="withAmtContainer">
         <input type="number"  class="withAmt" step="0.00000001" bind:value="{withAmt}">
@@ -146,12 +156,30 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1.2rem;
     }
     hr {
         margin-top: 2rem;
         margin-bottom: 1rem;
         border: 0.1rem solid;
+    }
+
+    .withAddyContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .withAddy {
+        width: 23.2rem;
+        padding: 12px 20px;
+        margin: 8px 0;
+        font-size: 1rem;
+        border: 1px solid rgba(97, 97, 97, 0.753);
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: rgb(255, 255, 255);
+        color: black;
     }
 
     .withAmtContainer {

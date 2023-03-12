@@ -23,6 +23,7 @@
 
 	$: money
 	
+	const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 2});
 
 	onMount(() => {
 		if (data.session) {
@@ -39,12 +40,12 @@
 		
 			socket.on('conf', (body) => {
 				if (body.conf == 0 && body.user_id == data.session.user.id) {
-					toast(`${((body.amount/100000000)*data.ltcPrice).toFixed(2)} $ received, waiting for confirmation`, {
+					toast(`${formatter.format((body.amount/100000000)*data.ltcPrice)} received, waiting for confirmation`, {
 						icon: '💰',
 					})
 					console.log("0 conf hit client")
 				} else if (body.conf == 1 && body.user_id == data.session.user.id){
-					toast(`${((body.amount/100000000)*data.ltcPrice).toFixed(2)} $ was added to your balance`, {
+					toast(`${formatter.format((body.amount/100000000)*data.ltcPrice)} was added to your balance`, {
 						icon: '💰',
 					})
 					console.log("1 conf hit server")
@@ -64,8 +65,6 @@
 			subscribtion.unsubscribe();
 		};
 	});
-
-	const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 2});
 </script>
 
 <svelte:head>
