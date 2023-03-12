@@ -27,7 +27,7 @@
 	onMount(() => {
 		if (data.session) {
 			
-			const socket = io('https://robert56s-vigilant-space-trout-gprqg9v7p7qhv47j-8080.preview.app.github.dev')
+			const socket = io('http://localhost:8080')
 		
 			socket.on('eventFromServer', (message) => {
 				console.log(message)
@@ -39,12 +39,12 @@
 		
 			socket.on('conf', (body) => {
 				if (body.conf == 0 && body.user_id == data.session.user.id) {
-					toast(`${body.amount*data.ltcPrice} $ received, waiting for confirmation`, {
+					toast(`${((body.amount/100000000)*data.ltcPrice).toFixed(2)} $ received, waiting for confirmation`, {
 						icon: '💰',
 					})
 					console.log("0 conf hit client")
 				} else if (body.conf == 1 && body.user_id == data.session.user.id){
-					toast(`${body.amount*data.ltcPrice} $ was added to your balance`, {
+					toast(`${((body.amount/100000000)*data.ltcPrice).toFixed(2)} $ was added to your balance`, {
 						icon: '💰',
 					})
 					console.log("1 conf hit server")
@@ -99,7 +99,7 @@
 			{#if data.session}
 			<div class="right">
 				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a href="#" style="visibility: none; height: 100%; display: flex; align-items: center;">
+				<a href="/settings/wallet" style="visibility: none; height: 100%; display: flex; align-items: center;">
 					<div class="wallet">
 						<div class="inside">
 							<img src="https://cdn.discordapp.com/attachments/828812665232425000/1081777423135277136/image.png" alt="" class="walletIcon">
@@ -260,5 +260,9 @@
 		padding: 0rem;
 		margin-inline: 1rem;
 		justify-self: right !important;
+		transition: 0.1s;
+	}
+	#aMenu:active {
+		transform: scale(0.9);
 	}
 </style>

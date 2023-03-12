@@ -2,8 +2,26 @@ import express from 'express'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import { SECRET_CALLBACK_KEY } from '$env/static/private'
+import { getServiceSupabase } from '$lib/servicerole';
 
 export const start_server = () => {
+
+    const updateLtc = async (body) => {
+
+        const supabase = await getServiceSupabase()
+
+        let { data: ltc } = await supabase
+            .from('profiles')
+            .select('ltc_amount')
+            .eq('id', body.user_id)
+
+        ltc = ltc[0].ltc_amount
+
+        const { data: profiles } = await supabase
+            .from('profiles')
+            .update({ ltc_amount: (ltc + body.amount) })
+            .eq('id', body.user_id)
+    }
 
     const port = 8080
     const app = express()
@@ -22,13 +40,6 @@ export const start_server = () => {
         socket.emit('eventFromServer', { message: 'Welcome!', id: socket.id });
 
     });
-
-    function sendTime() {
-        console.log('time send')
-        io.emit('time', { time: new Date().toJSON() });
-    }
-
-    setTimeout(sendTime, 10000);
 
     app.post('/api/ltc-callbacks', (req, res) => {
         let data = JSON.parse(JSON.stringify(req.body));
@@ -49,24 +60,20 @@ export const start_server = () => {
         }
 
         if (data.confirmations === 0) {
-            res.status(201);
+            res.status(200);
             res.send('0 conf Data Received: ' + data);
             io.emit('conf', body)
             return
 
         } else if (data.confirmations === 1) {
-            res.status(200);
-            res.send('1 conf Data Received: ' + data)
-            io.emit('conf', body)
-            return
-
-        } else if (data.confirmations > 1) {
+            updateLtc(body)
             res.status(200);
             res.send('*ok*')
-            console.log('we good')
+            io.emit('conf', body)
+            console.log('1 conf, we good')
             return
-        }
 
+        }
     })
 
     server.listen(port, () => {
