@@ -15,7 +15,7 @@
                 <a href="/settings/general" class:active={current === '/general'} on:click={() => current = '/general'}>General</a>
                 <a href="/settings/my-offers" class:active={current === '/my-offers'} on:click={() => current = '/my-offers'}>My Offers</a>
                 <a href="/settings/purchases" class:active={current === '/purchases'} on:click={() => current = '/purchases'}>Purchases</a>
-                <a href="/settings/wallet" class:active={current === '/wallet'} on:click={() => current = '/wallet'}>Wallet</a>
+                <a href="/settings/wallet" class:active={current === '/deposit' && '/withdraw'} on:click={() => current = '/deposit'}>Wallet</a>
                 <a href="/settings/general" class:active={current === '/other'} on:click={() => current = '/other'}>Misc</a>
             </div>
         </div>
