@@ -22,6 +22,12 @@
         <a href="/settings/wallet/withdraw" class="nav" class:active={current === '/withdraw'} on:click={() => current = '/withdraw'}>Withdraw</a>
     </div>
     <slot></slot>
+    <div class="amountContainer">
+        Amount in your Wallet:
+        <div class="amout">
+            <input readonly type="text" class="ltc" value="{data.money.ltc/100000000}">
+        </div>
+    </div>
 </div>
 
 <style>
@@ -59,5 +65,25 @@
         color: rgb(80, 80, 80) !important; 
         background-color: rgb(189, 189, 189) !important;
         
+    }
+
+    .amountContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+    .ltc {
+        width: 10rem;
+        padding: 12px 20px;
+        margin: 8px 0;
+        font-size: 1rem;
+        border: 1px solid rgba(97, 97, 97, 0.753);
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: rgb(255, 255, 255);
+        color: black;
+        margin-left: 1rem;
     }
 </style>

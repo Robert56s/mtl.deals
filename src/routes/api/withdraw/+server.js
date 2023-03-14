@@ -7,12 +7,12 @@ export const POST = async ({ request, locals }) => {
 
     let patern = new RegExp('/^[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}$/')
 
-    if (!patern.test(body.withAddy)) {
-        return new Response(JSON.stringify({ err: true, message: "Address is invalid"}));
-    }
+    // if (!patern.test(body.withAddy)) {
+    //     return new Response(JSON.stringify({ err: true, message: "Address is invalid"}));
+    // }
 
-    if (body.withAmt < 2000000) {
-        return new Response(JSON.stringify({ err: true, message: "You need to withdraw at least 0.02 ltc"}));
+    if (body.withAmt < 1000000) {
+        return new Response(JSON.stringify({ err: true, message: "You need to withdraw at least 0.01 ltc"}));
     }
 
     let { data: ltcAmt } = await locals.sbs
@@ -62,11 +62,17 @@ export const POST = async ({ request, locals }) => {
         created: responseData.created
     }
 
-    // await axios.post(`api/wallet-callbacks`, responseData)
-    //     .then(function (response) {
-    //         console.log(response.data)
-    //         responseData = response.data
-    //     })
+    const { data: walletsActivity } = await locals.sbs
+        .from('wallets_activity')
+        .insert([
+        { created: walletEventBody.created, user_id: walletEventBody.user_id, ltc_amount: walletEventBody.ltc_amount, type: walletEventBody.type, tx: walletEventBody.tx, destination: walletEventBody.destination },
+        ])
+
+    await axios.post(`https://e402-69-156-27-138.ngrok.io/api/wallet-callbacks`, walletEventBody)
+        .then(function (response) {
+            console.log(response.data)
+            responseData = response.data
+        })
     
     return new Response(JSON.stringify({message: "success"}));
     

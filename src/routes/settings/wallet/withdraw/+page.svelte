@@ -3,7 +3,7 @@
 
     export let data;
 
-    let withAmt = data.money.ltc/100000000
+    let withAmt = 0.01
     let withAddy;
     let withErr = false
 
@@ -23,10 +23,10 @@
 
         if (result.message === "success") {
             withErr = false
-            toast(`You withdrew ${formatter.format((data.money.ltc/100000000)*data.ltcPrice)}`, {
+            toast(`You withdrew ${formatter.format((withAmt)*data.ltcPrice)}`, {
 				icon: '💸',
 			})
-            setTimeout(location.reload(), 3000)
+            setTimeout(location.reload(), 5000)
         } else if (result.err == true) {
             withErr = result.message
         }
@@ -36,12 +36,6 @@
 <div class="withdraw">
     Withdraw Litcoin
     <img src="https://cdn.discordapp.com/attachments/828812665232425000/1084222672973594634/LTC-logo.png" alt="Litecoin Logo" class="ltcLogo">
-</div>
-<div class="amountContainer">
-    Amount in your Wallet:
-    <div class="amout">
-        <input readonly type="text" class="ltc" value="{data.money.ltc/100000000}">
-    </div>
 </div>
 <div class="withAddyContainer">
     <input type="text" class="withAddy" placeholder="Litecoin Address" bind:value={withAddy}>
@@ -69,26 +63,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .amountContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.3rem;
-        margin-bottom: 1.2rem;
-    }
-    .ltc {
-        width: 10rem;
-        padding: 12px 20px;
-        margin: 8px 0;
-        font-size: 1rem;
-        border: 1px solid rgba(97, 97, 97, 0.753);
-        border-radius: 4px;
-        box-sizing: border-box;
-        background-color: rgb(255, 255, 255);
-        color: black;
-        margin-left: 1rem;
     }
 
     .withAddyContainer {

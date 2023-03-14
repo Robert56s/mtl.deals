@@ -82,19 +82,13 @@ export const start_server = () => {
         console.log(data)
         res.setHeader('content-type', 'text/plain');
 
-        if(body.key !== SECRET_CALLBACK_KEY) {
+        if(data.key !== SECRET_CALLBACK_KEY) {
             res.status(401);
             res.send('Unauthorized')
             return
         }
 
-        delete body.key
-
-        const { data: walletsActivity } = supabase
-            .from('wallets_activity')
-            .insert([
-            { created: data.created, user_id: data.user_id, ltc_amount: data.ltc_amount, type: data.type, tx: data.tx, destination: data.destination },
-            ])
+        delete data.key
 
         io.emit('walletEvent', data)
 
