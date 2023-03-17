@@ -28,8 +28,33 @@
 <div class="addyContainer">
     <input readonly type="text" class="addy" id="addy" value="{walletMoney}" on:click={copyAddy} >
 </div>
+<div class="amountContainer">
+    Amount in your Wallet:
+    <div class="amout">
+        <input readonly type="text" class="ltc" value="{data.walAmt/100000000}">
+    </div>
+</div>
 
 <style>
+    .amountContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+    .ltc {
+        width: 10rem;
+        padding: 12px 20px;
+        margin: 8px 0;
+        font-size: 1rem;
+        border: 1px solid rgba(97, 97, 97, 0.753);
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: rgb(255, 255, 255);
+        color: black;
+        margin-left: 1rem;
+    }
     .deposit {
         font-size: 1.6rem;
         margin-bottom: 1rem;
@@ -49,7 +74,7 @@
     }
     .qr {
         aspect-ratio: 1/1;
-        height: 14rem;
+        height: 12.5rem;
         border-radius: 2rem;
     }
 

@@ -22,6 +22,12 @@ export const start_server = () => {
             .from('profiles')
             .update({ ltc_amount: (ltc + body.amount) })
             .eq('id', body.user_id)
+
+        const { data: walletsActivity } = await supabase
+            .from('wallets_activity')
+            .insert([
+            { created: new Date(), user_id: body.user_id, ltc_amount: body.amount, type: "deposit", tx: body.th, destination: "" },
+            ])
     }
 
     const port = 8080
@@ -75,24 +81,6 @@ export const start_server = () => {
             return
 
         }
-    })
-
-    app.post('/api/wallet-callbacks', (req, res) => {
-        let data = JSON.parse(JSON.stringify(req.body));
-        console.log(data)
-        res.setHeader('content-type', 'text/plain');
-
-        if(data.key !== SECRET_CALLBACK_KEY) {
-            res.status(401);
-            res.send('Unauthorized')
-            return
-        }
-
-        delete data.key
-
-        io.emit('walletEvent', data)
-
-        return res.send('success')
     })
 
     server.listen(port, () => {
