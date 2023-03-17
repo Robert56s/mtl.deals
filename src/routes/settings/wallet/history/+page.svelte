@@ -37,7 +37,7 @@
         min-width: 32rem;
         color: #000000;
         display: flex;
-        background-color: rgb(218, 218, 218);
+        background-color: rgb(255, 255, 255);
         padding: 1rem;
         margin-top: 0.5rem;
         margin-inline: 0.5rem;

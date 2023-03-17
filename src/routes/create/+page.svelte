@@ -217,6 +217,7 @@
         border-style: none;
 	  	border-radius: 10px;
 	  	transition: 0.3s;
+        cursor: pointer;
     }
     .bottombar button:hover {
         background: #55c051;

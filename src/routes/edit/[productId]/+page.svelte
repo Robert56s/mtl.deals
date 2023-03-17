@@ -35,9 +35,7 @@
         result = await response.json();
 
         if (result.message === 'success') {
-            toast.success('Successfully saved!', {
-                style: 'background: #333; color: #fff; margin-top: 50px',
-            })
+            toast.success('Successfully saved!')
             redirect.click()
         } else {
             toast.error("This didn't work.")
@@ -216,6 +214,7 @@
         border-style: none;
 	  	border-radius: 10px;
 	  	transition: 0.3s;
+        cursor: pointer;
     }
     .bottombar button:hover {
         background: #55c051;

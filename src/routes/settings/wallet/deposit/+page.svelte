@@ -19,7 +19,7 @@
 </script>
 
 <div class="deposit">
-    Deposit Litcoin
+    Deposit Litecoin
     <img src="https://cdn.discordapp.com/attachments/828812665232425000/1084222672973594634/LTC-logo.png" alt="Litecoin Logo" class="ltcLogo">
 </div>
 <div class="qrContainer">
