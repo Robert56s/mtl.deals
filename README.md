@@ -2,7 +2,7 @@
 
 https://mtl.deals 
 
-## Commands
+# Commands
 ### Download packages
 ```
 npm install
@@ -16,15 +16,15 @@ npm run dev
 npm run build
 ```
 
-## Enviroment variables
+# Enviroment variables
 - `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`, `SECRET_SUPABASE_SERVICE_KEY` are the [Supabase](https://supabase.com/) api credentials 
 - `SECRET_LTC_WALLET_ID`, `SECRET_LTC_TRANSFER_KEY` are the [Apirone](https://apirone.com/) credential. You must create a Litecoin wallet in the Apirone dashboard.
 - `SECRET_CALLBACK_KEY` is a random string that you must create, it is used to protect callbacks api routes.
 
-## Supabase
+# Supabase
 You must create an acount and a project at [Supabase](https://supabase.com/). You need to enable email authentification and do the url configuration. Also, make sure to enable row level security for the tables. 
 
-## Database sql schema 
+# Database SQL Tables
 ```sql
 create table offers (
   id bigint not null primary key,
