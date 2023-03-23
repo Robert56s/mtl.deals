@@ -24,7 +24,7 @@ npm run build
 # Supabase
 You must create an acount and a project at [Supabase](https://supabase.com/). You need to enable email authentification and do the url configuration. Also, make sure to enable row level security for the tables. 
 
-# Database SQL Tables
+# Database Tables (SQL)
 ```sql
 create table offers (
   id bigint not null primary key,
