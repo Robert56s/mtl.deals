@@ -11,10 +11,10 @@ export async function load({ locals, params }) {
 
         let { data: profiles, error:err2 } = await locals.sbs
             .from('profiles')
-            .select('avatar_base64, username')
+            .select('avatar_link, username')
             .eq('id', obj.user_id)
 
-        obj["avatar"] = profiles[0].avatar_base64
+        obj["avatar"] = profiles[0].avatar_link
         obj["username"] = profiles[0].username
 
         return obj

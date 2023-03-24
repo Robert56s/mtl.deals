@@ -16,10 +16,10 @@ export async function load({ locals }) {
         
         let { data: avatar, error } = await locals.sbs
             .from('profiles')
-            .select('avatar_base64')
+            .select('avatar_link')
             .eq('id', locals.session.user.id)
         
-        avatar = avatar[0].avatar_base64
+        avatar = avatar[0].avatar_link
         return avatar
     }
 

@@ -6,7 +6,7 @@
 
     let fileinput, imgButton, redirect;
 
-    let img = data.product.img_base64;
+    let img = data.product.img_link;
     let title = data.product.title;
     let description = data.product.description;
     let price = (data.product.price/100).toFixed(2);

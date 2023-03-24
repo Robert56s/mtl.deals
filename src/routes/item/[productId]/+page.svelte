@@ -22,7 +22,7 @@
             </div>
             <div class="main">
                 <div class="view">
-                    <img class="picture" src={data.product.img_base64} alt="">
+                    <img class="picture" src={data.product.img_link} alt="">
                 </div>
                 <div class="description">
                     <h3>Description:</h3>

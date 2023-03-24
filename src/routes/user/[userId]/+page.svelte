@@ -7,7 +7,7 @@
 <div class="box">
     <div class="bar">
         <div class="flex">
-            <img class="avatar" src={data.profile.avatar_base64} alt="">
+            <img class="avatar" src={data.profile.avatar_link} alt="">
             <h1 class="username">{data.profile.username}</h1>
         </div>
         <a href="/" data-sveltekit-prefetch><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back" class="back"></a>
@@ -18,7 +18,7 @@
             <a href="/item/{offer.id}" class="anchor">
                 <div class="card">
                     <div class="view">
-                        <img src={offer.img_base64} alt="">
+                        <img src={offer.img_link} alt="">
                     </div>
                     <div class="bottom">
                         <p class="title">
@@ -76,6 +76,7 @@
         border-radius: 1rem;
     }
     .grid {
+        margin-top: 1rem;
         flex: 1;
         display: grid;
         justify-content: center;

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { SECRET_IMGUR_CLIENT_ID } from "$env/static/private"
 
 const registerSchema = z.object({
     title: z
@@ -21,8 +22,6 @@ export const POST = async ({ request, locals }) => {
 
     const body = await request.json();
 
-    console.log(body)
-
     try {
         const result = registerSchema.parse(body)
     } catch (err) {
@@ -30,10 +29,23 @@ export const POST = async ({ request, locals }) => {
         return new Response(JSON.stringify({ data: body, errors, message: "error"}));
     }
 
+    let img = body.image.split("base64,")[1];
+    const formData = new FormData()
+    formData.append('image', img)
+
+    const response = await fetch('https://api.imgur.com/3/image', {
+        method: 'POST',
+        headers: {
+            "Authorization": `Client-ID ${SECRET_IMGUR_CLIENT_ID}`
+        },
+        body: formData
+    });
+    const responseData = await response.json();
+
     
     const { data, error } = await locals.sbs
         .from('offers')
-        .update({ img_base64: body.image, title: body.title, description: body.description, price: body.price })
+        .update({ img_link: responseData.data.link, title: body.title, description: body.description, price: body.price })
         .eq('id', body.id)
 
 

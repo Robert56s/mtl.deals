@@ -11,7 +11,7 @@
             <a href="/item/{product.id}" class="anchor">
                 <div class="card">
                     <div class="view">
-                        <img src={product.img_base64} alt="">
+                        <img src={product.img_link} alt="">
                     </div>
                     <div class="bottom">
                         <p class="title">

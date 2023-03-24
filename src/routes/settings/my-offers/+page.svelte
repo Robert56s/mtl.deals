@@ -41,7 +41,7 @@
             <div class="card" id={i + 1} bin>
                 <div class="view">
                     <!-- svelte-ignore a11y-missing-attribute -->
-                    <img src={product.img_base64} class="image">
+                    <img src={product.img_link} class="image">
                 </div>
                 <div class="stuff">
                     <div class="text">

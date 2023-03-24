@@ -20,12 +20,16 @@ npm run build
 - `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`, `SECRET_SUPABASE_SERVICE_KEY` are the [Supabase](https://supabase.com/) api credentials 
 - `SECRET_LTC_WALLET_ID`, `SECRET_LTC_TRANSFER_KEY` are the [Apirone](https://apirone.com/) credentials.
 - `SECRET_CALLBACK_KEY` is a random string that you must create, it is used to protect callbacks api routes.
+- `SECRET_IMGUR_CLIENT_ID` is your [Imgur](https://api.imgur.com/oauth2/addclient) Client ID.
 
 # Apirone
 You must got to the [Dashboard](https://apirone.com/dashboard/) and create a Litecoin wallet. Save the credentials.
 
 # Supabase
 You must create an acount and a project at [Supabase](https://supabase.com/). You need to enable email authentification and do the url configuration. Also, make sure to enable row level security for the tables. 
+
+# Imgur
+You need to register to the [Imgur api](https://api.imgur.com/oauth2/addclient). You need to select Authorization type: Anonymous usage without user authorization. You can then save the credentials.
 
 # Database Tables (SQL)
 ```sql
@@ -34,7 +38,7 @@ create table offers (
   created_at timestamp default now(),
   user_id uuid default uuid_generate_v4(),
   price integer not null,
-  img_base64 text not null,
+  img_link text not null,
   title text not null,
   description text not null
 );
@@ -58,7 +62,7 @@ create table profiles (
   id uuid references auth.users on delete cascade not null primary key,
   updated_at timestamp with time zone,
   username text unique,
-  avatar_base64 text,
+  avatar_link text,
   ltc_addy text,
   ltc_amount bigint,
 
