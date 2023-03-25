@@ -11,17 +11,18 @@ export async function load({ locals, params }) {
 
         let { data: profiles, error:err2 } = await locals.sbs
             .from('profiles')
-            .select('avatar_link, username')
+            .select('avatar_link, username, id')
             .eq('id', obj.user_id)
 
         obj["avatar"] = profiles[0].avatar_link
         obj["username"] = profiles[0].username
+        obj["seller_id"] = profiles[0].id
 
         return obj
     }
 
     return {
-        product: getOffer(params.productId)
+        product: getOffer(params.productId) 
     }
 
 }

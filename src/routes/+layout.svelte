@@ -20,7 +20,7 @@
 	
 		
 	let money = (data.money?.ltc/100000000)*data.ltcPrice
-
+	
 	$: money
 	
 	const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 2});
@@ -156,7 +156,7 @@
 
 	.wallet {
 		display: flex;
-		width: 8rem;
+		min-width: 8rem;
 		height: 2.5rem;
 		background: rgb(42,111,150);
 		background: radial-gradient(circle, rgba(42,111,150,1) 38%, rgba(0,73,116,1) 100%); 

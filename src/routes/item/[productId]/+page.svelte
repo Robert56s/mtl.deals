@@ -1,8 +1,32 @@
 <script>
+    import toast from 'svelte-french-toast';
     export let data;
+    console.log(data)
     let price = 0.01;
 
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
+
+    const buy = async () => {
+        const response = await fetch('/api/buy', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: data.product.id,
+                price: (data.product.price/100),
+                seller_id: data.product.seller_id
+            })
+        })
+        const result = await response.json();
+
+        if (result.message === 'success') {
+            window.location.replace("/settings/purchases/success")
+        } else {
+            toast.error(result.message)
+        }
+    }
+
 </script>
 
 <div class="container">
@@ -38,7 +62,7 @@
                 <button class="bid">Bid</button>
             </form>
             or
-            <button class="buy">
+            <button class="buy" on:click={buy}>
                 Buy
             </button>
         </div>
