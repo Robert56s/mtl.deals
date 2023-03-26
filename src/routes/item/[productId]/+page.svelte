@@ -21,7 +21,7 @@
         const result = await response.json();
 
         if (result.message === 'success') {
-            window.location.replace("/settings/purchases/success")
+            window.location.replace("/settings/purchases")
         } else {
             toast.error(result.message)
         }
