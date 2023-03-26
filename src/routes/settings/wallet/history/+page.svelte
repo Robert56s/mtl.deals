@@ -12,12 +12,10 @@
                     <p class="tx">
                         {history.tx}
                     </p>
-                        
                 </div>
             </div>
         </a>
     </div>
-
     {/each}
 </div>
 

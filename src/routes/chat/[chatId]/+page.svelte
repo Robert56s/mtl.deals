@@ -2,24 +2,35 @@
     import { io } from 'socket.io-client'
     import { onMount } from 'svelte';
     export let data;
-    console.log(data.receipt, data.messages)
-
+    
+    
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
-
-    let messages = [].concat(data.messages)
-
+    
+    let messages
+    $: messages = [].concat(data.messages)
+    
     let sendMessage;
 
     const handleSend = async () => {
-        console.log(sendMessage)
+        socket.emit("send-message", {
+            message: sendMessage,
+            sender_id: {
+                id: data.profile.id,
+                username: data.profile.username,
+                avatar_link: data.profile.avatar_link
+            },
+            chat_id: data.receipt.chat_id
+        }, data.receipt.chat_id)
     }
-
+    
+    let socket;
     onMount(() => {
-        const socket = io('http://localhost:8080')
-		
-		socket.on('walletEvent', (message) => {
-			console.log(message)
-		})
+        socket = io('http://localhost:8080')
+        socket.emit('join-room', data.receipt.chat_id)
+        socket.on("receive-message", (body) => {
+            console.log(body)
+            messages.push(body)
+        })
     })
 
 </script>
@@ -33,10 +44,12 @@
             <div class="description">
                 {data.receipt.offers.description}
             </div>
-            <div class="seller">
-                Seller: {data.receipt.seller_id.username}
-                <img src="{data.receipt.seller_id.avatar_link}" alt="" class="profileIcon">
-            </div>
+            <a href="/user/{data.receipt.seller_id.id}">
+                <div class="seller">
+                    Seller: {data.receipt.seller_id.username}
+                    <img src="{data.receipt.seller_id.avatar_link}" alt="" class="profileIcon">
+                </div>
+            </a>
         </div>
         <div class="money">
             <div class="price">
@@ -49,7 +62,7 @@
         </div>
         <div class="icons">
             <a href="/settings/purchases">
-                <img src="https://cdn.discordapp.com/attachments/828812665232425000/1089290210786938890/7693271_1.png" alt="">
+                <img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="">
             </a>
         </div>
     </div>
@@ -74,9 +87,16 @@
 </div>
 
 <style>
+    a {
+        all: unset;
+        cursor: pointer;
+    }
     .marde {
+        flex: 1;
         background-color: #e7e7e7;
         border-radius: 0.3rem;
+        display: flex;
+        flex-direction: column;
     }
     .seller {
         display: flex;
@@ -88,8 +108,8 @@
     }
 
     .chat {
+        flex:0.9;
         width: 100%;
-        height: 57vh;
         background-color: #e7e7e7;
     }
     .field {
@@ -114,7 +134,7 @@
 
     .bottombar {
         width: 100%;
-        max-height: 9vh;
+        flex: 0.1;
         background: rgb(135,135,135);
         background: linear-gradient(0deg, rgb(204, 204, 204) 0%, rgba(231,231,231,1) 100%);
         border-radius: 0.5rem;
@@ -158,7 +178,8 @@
 
     .topbar {
         display: flex;
-        background-color: rgb(255, 255, 255);
+        align-items: center;
+        background-color: whitesmoke;
         padding: 0.3rem;
         border-radius: 0.5rem;
     }
@@ -223,6 +244,6 @@
     }
     .icons img {
         aspect-ratio: 1/1;
-        height: 2rem;
+        height: 2.2rem;
     }
 </style>

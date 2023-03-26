@@ -46,6 +46,16 @@ export const start_server = () => {
         // Use socket to communicate with this particular client only, sending it it's own id
         socket.emit('eventFromServer', { message: 'Welcome!', id: socket.id });
 
+        socket.on('join-room', (room) => {
+            console.log('room joined')
+            socket.join(room)
+        })
+
+        socket.on('send-message', (body, room) => {
+            socket.to(room).emit("receive-message", body)
+            console.log('message sent')
+        })
+
     });
 
     app.post('/api/ltc-callbacks', (req, res) => {

@@ -19,9 +19,20 @@ export async function load({ locals, params }) {
         return receipts[0]
     }
 
+    const getProfile = async () => {
+
+        let { data: profiles, error } = await locals.sbs
+        .from('profiles')
+        .select('*')
+        .eq('id', locals.session.user.id)
+
+        return profiles[0]
+    }
+
     return {
         messages: getMessages(params.chatId),
-        receipt: getReicept(params.chatId)
+        receipt: getReicept(params.chatId),
+        profile: getProfile()
     }
 
 }

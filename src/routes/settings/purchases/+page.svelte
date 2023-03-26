@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="icons">
-                    <a href="/settings/purchases/chat/{receipt.chat_id}">
+                    <a href="/chat/{receipt.chat_id}">
                         <img src="https://cdn.discordapp.com/attachments/828812665232425000/1089203367676485694/chat.png" alt="">
                     </a>
                     <button on:click={()=>{popup = true; selected = receipt.id;}}>
