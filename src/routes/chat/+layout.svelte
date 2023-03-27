@@ -1,5 +1,14 @@
 <script>
+    import { onMount } from 'svelte';
     export let data;
+
+    let current
+    
+    onMount(() => {
+        current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+        console.log(current)
+    })
+
 </script>
 
 <div class="container">
@@ -9,10 +18,15 @@
         </div>
         <div class="content">
             {#each data.receipts as chat}
-            <a href="/chat/{chat.chat_id}">
-                <div class="bubble">
+            <a href="/chat/{chat.chat_id}" on:click={()=>{current = chat.chat_id}}>
+                <div class="bubble" class:active={current === `${chat.chat_id}`}>
+                    {#if chat.buyer_id.id == data.session.user.id}
                     <img src="{chat.seller_id.avatar_link}" alt="" class="icon">
                     {chat.seller_id.username} for <br> {chat.offers.title}
+                    {:else}
+                    <img src="{chat.seller_id.avatar_link}" alt="" class="icon">
+                    Selling {chat.offers.title} to {chat.buyer_id.username}
+                    {/if}
                 </div>
             </a>
             {/each}
@@ -47,10 +61,21 @@
     .bubble {
         display: flex;
         align-items: center;
-        background-color: thistle;
+        background-color: rgb(233, 217, 233);
         margin-top: 1.5rem;
-        border-radius: 1rem;
+        border-radius: 0.5rem;
+        transition: 0.3s;
     }
+    .bubble:hover {
+        background-color: thistle;
+    }
+    .bubble:active {
+        transform: scale(0.9);
+    }
+    .active {
+        background-color: rgb(197, 165, 197) !important;
+    }
+
     .icon {
         aspect-ratio: 1/1;
         height: 2.5rem;

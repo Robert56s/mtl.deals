@@ -6,11 +6,10 @@ export const load = async ({ locals }) => {
         .from('receipts')
         .select(`*, offers (*), seller_id(*), buyer_id(*)`)
         .eq('active', true)
-
-        return receipts
-        // if(receipts)
         
-        // const result = 
+        const result = receipts.filter(body => body.buyer_id.id || body.seller_id.id == locals.session.user.id)
+        
+        return result
     }
 
     return {

@@ -1,4 +1,5 @@
 <script>
+    import { scale } from 'svelte/transition';
     import { io } from 'socket.io-client'
     import { onDestroy, onMount } from 'svelte';
     export let data;
@@ -9,11 +10,12 @@
     let messages
     $: messages = [].concat(data.messages)
 
-    
-    
     let sendMessage;
 
     const handleSend = async (hash) => {
+
+        if (sendMessage == "" || !sendMessage) return
+
         socket.emit("send-message", {
             message: sendMessage,
             sender_id: {
@@ -37,20 +39,29 @@
         })
         sendMessage = ""
         const result = await response.json();
-        
+    }
+
+    const handleKeydown = async (e) => {
+        if (e.key == "Enter") {
+            handleSend()
+        }
     }
     
     let socket;
     onMount(() => {
-        if (data.session) {
-            socket = io('http://localhost:8080')
-            socket.emit('join-room', data.receipt.chat_id)
-            socket.on("receive-message", (body) => {
-                messages = [...messages, body]
-                // let last = document.querySelector('#bite');
-                // last.scrollTop = last.scrollHeight ;
-            })
-        }
+        let last = document.querySelector('#bite');
+        last.scrollTop = last.scrollHeight;
+
+        socket = io('http://localhost:8080')
+        socket.emit('join-room', data.receipt.chat_id)
+        socket.on("receive-message", (body) => {
+            messages = [...messages, body]
+            setTimeout(()=>{
+                let last = document.querySelector('#bite');
+                last.scrollTop = last.scrollHeight;
+            }, 100)
+        })
+        
     })
     onDestroy(() => {
         socket = ""
@@ -69,8 +80,13 @@
             </div>
             <a href="/user/{data.receipt.seller_id.id}">
                 <div class="seller">
+                    {#if data.receipt.buyer_id.id == data.session.user.id}
                     Seller: {data.receipt.seller_id.username}
                     <img src="{data.receipt.seller_id.avatar_link}" alt="" class="profileIcon">
+                    {:else}
+                    buyer_id: {data.receipt.buyer_id.username}
+                    <img src="{data.receipt.buyer_id.avatar_link}" alt="" class="profileIcon">
+                    {/if}
                 </div>
             </a>
         </div>
@@ -98,7 +114,7 @@
     <div class="chat" id="bite">
         {#each messages as message}
         <div class="field">
-            <div class="bubble">
+            <div class="bubble" transition:scale={{duration:100}}>
                 <a href="/user/{message.sender_id.id}">
                     <img src="{message.sender_id?.avatar_link}" alt="" class="profileIcon">
                 </a>
@@ -108,7 +124,7 @@
         {/each}
     </div>
     <div class="bottombar">
-        <input type="text" bind:value={sendMessage}>
+        <input type="text" bind:value={sendMessage} on:keydown={handleKeydown}>
         <button class="send" on:click={handleSend}>
             <img class="sendIcon" src="https://cdn.discordapp.com/attachments/828812665232425000/1089298084133089390/3682321.png" alt="">
         </button>
@@ -121,7 +137,7 @@
         cursor: pointer;
     }
     .marde {
-        height: 91vh;
+        height: 90vh;
         flex: 1;
         background-color: #e7e7e7;
         border-radius: 0.3rem;
