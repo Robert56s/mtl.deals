@@ -1,5 +1,6 @@
 <script>
     import toast from 'svelte-french-toast';
+  import { each } from 'svelte/internal';
     export let data;
 
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
@@ -37,6 +38,7 @@
     </div>
     <div class="main">
         {#each [... data.products].reverse() as product, i}
+        {#if product.active}
         <a href="/item/{product.id}" class="anchor">
             <div class="card" id={i + 1} bin>
                 <div class="view">
@@ -71,12 +73,60 @@
                 </div>
             </div>
         </a>
-        
+        {/if}
+        {/each}
+        {#each [... data.receipts].reverse() as receipt, i}
+        <a href="/chat/{receipt.chat_id}" class="anchor">
+            <div class="card" id={i + 1} bin>
+                <div class="view">
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <img src={receipt.offers.img_link} class="image">
+                </div>
+                <div class="stuff">
+                    <div class="text">
+                        <div class="top">
+                            <div class="title">
+                                {receipt.offers.title}
+                            </div>
+                            <div class="price">
+                                {formatter.format((receipt.offers.price/100))}
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            {receipt.offers.description}
+                            <div class="status">
+                                {#if receipt.active}
+                                Status: Sold, waiting for buyer confirmation
+                                {:else}
+                                Status: sold
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icons">
+                        {#if receipt.active}
+                        <a href="/chat/{receipt.chat_id}">
+                            <img src="https://cdn.discordapp.com/attachments/828812665232425000/1089203367676485694/chat.png" alt="">
+                        </a>
+                        {:else}
+                        <button>
+                            Archive
+                        </button>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </a>
         {/each}
     </div>
 </div>
 
 <style>
+    .status {
+        margin-top: 1rem;
+        color: black;
+    }
+
     .bar {
         display: flex;
         justify-content: left;

@@ -47,13 +47,13 @@ export const start_server = () => {
         socket.emit('eventFromServer', { message: 'Welcome!', id: socket.id });
 
         socket.on('join-room', (room) => {
-            console.log('room joined')
-            socket.join(room)
+            socket.join(room);
+            console.log(`Joined this room: ${room}`)
         })
 
         socket.on('send-message', (body, room) => {
-            socket.to(room).emit("receive-message", body)
-            console.log('message sent')
+            io.to(room).emit("receive-message", body)
+            console.log(`emit to this ${room}`)
         })
 
     });

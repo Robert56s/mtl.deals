@@ -4,10 +4,13 @@ export const load = async ({ locals }) => {
         
         let { data: receipts, error } = await locals.sbs
         .from('receipts')
-        .select(`*, offers (*), seller_id(*)`)
-        .eq('buyer_id', locals.session.user.id)
+        .select(`*, offers (*), seller_id(*), buyer_id(*)`)
         .eq('active', true)
+
         return receipts
+        // if(receipts)
+        
+        // const result = 
     }
 
     return {

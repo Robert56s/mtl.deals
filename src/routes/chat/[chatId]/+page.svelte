@@ -1,6 +1,6 @@
 <script>
     import { io } from 'socket.io-client'
-    import { onMount } from 'svelte';
+    import { onDestroy, onMount } from 'svelte';
     export let data;
     
     
@@ -8,10 +8,12 @@
     
     let messages
     $: messages = [].concat(data.messages)
+
+    
     
     let sendMessage;
 
-    const handleSend = async () => {
+    const handleSend = async (hash) => {
         socket.emit("send-message", {
             message: sendMessage,
             sender_id: {
@@ -21,16 +23,37 @@
             },
             chat_id: data.receipt.chat_id
         }, data.receipt.chat_id)
+
+        const response = fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                sender_id: data.session.user.id,
+                chat_id: data.receipt.chat_id,
+                message: sendMessage
+            })
+        })
+        sendMessage = ""
+        const result = await response.json();
+        
     }
     
     let socket;
     onMount(() => {
-        socket = io('http://localhost:8080')
-        socket.emit('join-room', data.receipt.chat_id)
-        socket.on("receive-message", (body) => {
-            console.log(body)
-            messages.push(body)
-        })
+        if (data.session) {
+            socket = io('http://localhost:8080')
+            socket.emit('join-room', data.receipt.chat_id)
+            socket.on("receive-message", (body) => {
+                messages = [...messages, body]
+                // let last = document.querySelector('#bite');
+                // last.scrollTop = last.scrollHeight ;
+            })
+        }
+    })
+    onDestroy(() => {
+        socket = ""
     })
 
 </script>
@@ -61,16 +84,22 @@
             </div>
         </div>
         <div class="icons">
+            {#if data.receipt.buyer_id.id == data.session.user.id}
             <a href="/settings/purchases">
                 <img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="">
             </a>
+            {:else}
+            <a href="/settings/my-offers">
+                <img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="">
+            </a>
+            {/if}
         </div>
     </div>
-    <div class="chat">
+    <div class="chat" id="bite">
         {#each messages as message}
         <div class="field">
             <div class="bubble">
-                <a href="/user/{message.sender_id}">
+                <a href="/user/{message.sender_id.id}">
                     <img src="{message.sender_id?.avatar_link}" alt="" class="profileIcon">
                 </a>
                 {message.message}
@@ -92,11 +121,13 @@
         cursor: pointer;
     }
     .marde {
+        height: 91vh;
         flex: 1;
         background-color: #e7e7e7;
         border-radius: 0.3rem;
         display: flex;
         flex-direction: column;
+        scroll-snap-align: end;
     }
     .seller {
         display: flex;
@@ -111,6 +142,9 @@
         flex:0.9;
         width: 100%;
         background-color: #e7e7e7;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-behavior: smooth;
     }
     .field {
         display: flex;
@@ -121,7 +155,7 @@
         display: flex;
         align-items: center;
         background-color: #ffffff;
-        padding: 1rem;
+        padding: 0.8rem 1rem;
         border-radius: 1rem;
     }
     .profileIcon {
