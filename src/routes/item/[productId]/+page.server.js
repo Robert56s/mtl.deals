@@ -2,23 +2,12 @@
 export async function load({ locals, params }) {
     //fix
     const getOffer = async (id) => {
-        let { data: offers, error: err1 } = await locals.sbs
+        let { data: offers } = await locals.sbs
             .from('offers')
-            .select('*')
+            .select('*, user_id(*)')
             .eq('id', id)
-        
-        let obj = offers[0]
 
-        let { data: profiles, error:err2 } = await locals.sbs
-            .from('profiles')
-            .select('avatar_link, username, id')
-            .eq('id', obj.user_id)
-
-        obj["avatar"] = profiles[0].avatar_link
-        obj["username"] = profiles[0].username
-        obj["seller_id"] = profiles[0].id
-
-        return obj
+        return offers[0]
     }
 
     return {

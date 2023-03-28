@@ -4,11 +4,18 @@
     import { scale } from 'svelte/transition';
 
     export let data;
-    console.log(data.receipts)
+    
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
 
     let popup = false;
     let selected;
+
+    onMount(()=>{
+        if (window.location.hash == '#success') {
+            toast.success('Successfully bought!\nYou can now chat with the seller!')
+            window.location.hash = ''
+        }
+    })
 
 </script>
 

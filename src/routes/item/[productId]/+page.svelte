@@ -21,7 +21,7 @@
         const result = await response.json();
 
         if (result.message === 'success') {
-            window.location.replace("/settings/purchases")
+            window.location.replace("/settings/purchases/success")
         } else {
             toast.error(result.message)
         }
@@ -37,10 +37,10 @@
                     <h2>{data.product.title}</h2>
                     <div class="price">{formatter.format((data.product.price/100))}</div>
                 </div>
-                <a href="/user/{data.product.user_id}">
+                <a href="/user/{data.product.user_id.id}">
                     <div class="user">
-                        <h3 class="username">{data.product.username}</h3>
-                        <img class="avatar" src={data.product.avatar} alt="avatar">
+                        <h3 class="username">{data.product.user_id.username}</h3>
+                        <img class="avatar" src={data.product.user_id.avatar_link} alt="avatar">
                     </div>
                 </a>
             </div>

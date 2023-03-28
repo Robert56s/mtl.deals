@@ -1,26 +1,18 @@
 <script>
-    import { io } from 'socket.io-client'
     import { onMount } from 'svelte';
-    import {page} from '$app/stores'
 
-    let current = $page.url.pathname.substr($page.url.pathname.lastIndexOf('/'))
+    let current;
 
     onMount(() => {
-        const socket = io('http://localhost:8080')
-		
-		socket.on('walletEvent', (message) => {
-			console.log(message)
-		})
+        current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
     })
-
 </script>
 
 <div class="container">
     <div class="bar">
-        <a href="/settings/wallet/deposit" class="nav" class:active={current === '/deposit'} on:click={() => current = '/deposit'}>Deposit</a>
-        <a href="/settings/wallet/withdraw" class="nav" class:active={current === '/withdraw'} on:click={() => current = '/withdraw'}>Withdraw</a>
-        <a href="/settings/wallet/history" class="nav" class:active={current === '/history'} on:click={() => current = '/history'}>History</a>
-
+        <a href="/settings/wallet/deposit" class="nav" class:active={current === 'deposit'} on:click={() => current = 'deposit'}>Deposit</a>
+        <a href="/settings/wallet/withdraw" class="nav" class:active={current === 'withdraw'} on:click={() => current = 'withdraw'}>Withdraw</a>
+        <a href="/settings/wallet/history" class="nav" class:active={current === 'history'} on:click={() => current = 'history'}>History</a>
     </div>
     <slot></slot>
 </div>

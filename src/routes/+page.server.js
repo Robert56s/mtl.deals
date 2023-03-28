@@ -5,6 +5,7 @@ export const load = async ({ locals }) => {
         let { data: offers, error:err } = await locals.sbs
             .from('offers')
             .select('*')
+            .eq('active', true)
 
         return offers
     }
