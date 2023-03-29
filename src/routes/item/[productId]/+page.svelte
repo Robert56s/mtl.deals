@@ -15,7 +15,7 @@
             body: JSON.stringify({
                 id: data.product.id,
                 price: (data.product.price/100),
-                seller_id: data.product.seller_id
+                seller_id: data.product.user_id.id
             })
         })
         const result = await response.json();
