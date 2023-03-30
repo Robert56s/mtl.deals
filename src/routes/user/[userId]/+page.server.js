@@ -2,7 +2,7 @@
 export async function load({ locals, params }) {
     
     const getProfile = async (id) => {
-        let { data: profiles, error: err1 } = await locals.sbs
+        let { data: profiles } = await locals.sbs
             .from('profiles')
             .select('*')
             .eq('id', id)
@@ -11,10 +11,11 @@ export async function load({ locals, params }) {
     }
 
     const getOffers = async (id) => {
-        let { data: offers, error: err2 } = await locals.sbs
+        let { data: offers } = await locals.sbs
             .from('offers')
             .select('*')
             .eq('user_id', id)
+            .eq('active', true)
 
         return offers
     }

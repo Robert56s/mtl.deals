@@ -1,7 +1,6 @@
 <script>
-    import { onMount } from 'svelte';
-    import toast from 'svelte-french-toast';
     import { scale } from 'svelte/transition';
+    import toast from 'svelte-french-toast';
 
     export let data;
     
@@ -9,16 +8,32 @@
 
     let popup = false;
     let selected;
+    let redirect;
 
-    onMount(()=>{
-        if (window.location.hash == '#success') {
-            toast.success('Successfully bought!\nYou can now chat with the seller!')
-            window.location.hash = ''
+    const archive = async () => {
+        const response = await fetch('/api/archive', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: selected,
+            })
+        })
+        const result = await response.json();
+
+        if (result.message === 'success') {
+            toast.success('Successfully archived!')
+            redirect.click()
+        } else {
+            toast.error(result.message)
         }
-    })
+    }
 
 </script>
 
+<!-- svelte-ignore a11y-missing-content -->
+<a href="/settings/purchases/archive" style="display: none;" bind:this={redirect}></a>
 <div class="main">
     {#each [... data.receipts].reverse() as receipt, i}
         
@@ -65,7 +80,7 @@
             This will archive the purchase and <br> close comunication with the seller
         </p>
         Are you sure?
-        <button class="yes">Yes</button>
+        <button class="yes" on:click={archive()}>Yes</button>
         <button class="no" on:click={()=>{popup = false}}>No</button>
     </div> 
 {/if}

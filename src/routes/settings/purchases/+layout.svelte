@@ -1,10 +1,16 @@
 <script>
     import { onMount } from 'svelte';
+    export let data;
 
     let current
+    $: current
 
     onMount(() => {
         current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+
+        if (data.urlSearch) {
+            current = 'purchases'
+        }
     })
 
 </script>

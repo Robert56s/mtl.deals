@@ -93,10 +93,15 @@ export const load = async (event) => {
             return responceData.USD
         }
     }
+
+    const getUrlSearch = async () => {
+        return event.url.search
+    }
     
     return {
         session: session,
         money: await getMoney(),
-        ltcPrice: await getLtcPrice()
+        ltcPrice: await getLtcPrice(),
+        urlSearch: getUrlSearch()
     }
 }

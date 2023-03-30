@@ -60,7 +60,7 @@ export const POST = async ({ request, locals }) => {
     await locals.sbs
     .from('offers')
     .update({ active: false })
-    .eq('user_id', body.seller_id)
+    .eq('id', body.id)
         
     return new Response(JSON.stringify({message: "success", amount: ltcAmount}));
 }

@@ -1,9 +1,17 @@
 <script>
     import { onMount } from 'svelte';
+    import toast from 'svelte-french-toast';
+    export let data;
+
     let current;
-    
+    $: current
     onMount(() => {
         current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+
+        if (data.urlSearch == '?bought') {
+            toast.success('Successfully bought!\nYou can now chat with the seller!', { duration: 3000 })
+            current = 'purchases'
+        }
     })
     
 </script>

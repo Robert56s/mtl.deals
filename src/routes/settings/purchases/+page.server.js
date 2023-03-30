@@ -1,8 +1,8 @@
-export const load = async ({ locals }) => {
+export const load = async ({ locals }) => {    
 
     const getReicept = async () => {   
         
-        let { data: receipts, error } = await locals.sbs
+        let { data: receipts } = await locals.sbs
         .from('receipts')
         .select(`*, offers (*), seller_id(*)`)
         .eq('buyer_id', locals.session.user.id)

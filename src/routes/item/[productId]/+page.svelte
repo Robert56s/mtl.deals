@@ -1,8 +1,7 @@
 <script>
     import toast from 'svelte-french-toast';
     export let data;
-    console.log(data)
-    let price = 0.01;
+    // let price = 0.01;
 
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
 
@@ -21,7 +20,7 @@
         const result = await response.json();
 
         if (result.message === 'success') {
-            window.location.replace("/settings/purchases/success")
+            window.location.href = '/settings/purchases?bought'
         } else {
             toast.error(result.message)
         }
@@ -55,13 +54,13 @@
             </div>
         </div>
         <div class="bottombar">
-            <form action="" method="post">
+            <!-- <form action="" method="post">
                 <label for="price">Enter a bid amount: <b>$</b></label>
                 <input type="itemId" name="itemId" style="display: none;" bind:value={data.product.id}>
                 <input type="number" name="price" id="price" step="0.01" bind:value={price}>
                 <button class="bid">Bid</button>
             </form>
-            or
+            or -->
             <button class="buy" on:click={buy}>
                 Buy
             </button>
@@ -148,7 +147,7 @@
         justify-self: bottom;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: right;
         padding-bottom: 1rem;
     }
     .buy, .bid {
@@ -162,6 +161,7 @@
 	  	border-radius: 10px;
 	  	transition: 0.3s;
         cursor: pointer;
+        margin-right: 5rem;
     }
     .buy:hover, .bid:hover {
         background: #55c051;

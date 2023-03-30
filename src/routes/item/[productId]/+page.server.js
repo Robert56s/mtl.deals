@@ -1,3 +1,5 @@
+import { redirect } from '@sveltejs/kit'
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ locals, params }) {
     //fix
@@ -6,6 +8,9 @@ export async function load({ locals, params }) {
             .from('offers')
             .select('*, user_id(*)')
             .eq('id', id)
+            .eq('active', true)
+
+        if (!offers[0]) throw new redirect(303,'/')
 
         return offers[0]
     }
