@@ -32,7 +32,6 @@ const registerSchema = z.object({
 /** @type {import('./$types').Actions} */
 export const actions = {
     register: async ({ request, locals }) => {
-        await getAddy(locals)
         //convert form entries data to an object
         const body = Object.fromEntries(await request.formData())
 
