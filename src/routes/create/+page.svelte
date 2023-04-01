@@ -61,7 +61,7 @@
             <div class="upload" >
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <img src="https://static.thenounproject.com/png/625182-200.png" alt="" on:click={()=>{fileinput.click();}} />
-                <input type="file" id="img" name="img" accept="image/png, image/jpeg image/jpg" enctype="multipart/form-data" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
+                <input type="file" id="img" name="img" accept="image/png, image/gif, image/jpeg" on:change={(e)=>onFileSelected(e)} bind:this={fileinput}>
             </div>
         </div>
         <div class="view-info">

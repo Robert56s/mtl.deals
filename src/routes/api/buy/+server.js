@@ -21,7 +21,7 @@ export const POST = async ({ request, locals }) => {
     }
 
     const ltcPrice = await getLtcPrice()
-    const ltcAmount = ((body.price/ltcPrice)*100000000).toFixed(0)
+    const ltcAmount = Number(((body.price/ltcPrice)*100000000).toFixed(0))
     
     //update buyer ltc amount
     const { data: buyer } = await locals.sbs
