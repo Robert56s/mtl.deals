@@ -2,7 +2,6 @@ import "$lib/supabase"
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail } from '@sveltejs/kit';
 import { z } from 'zod';
-import { SECRET_LTC_WALLET_ID, SECRET_CALLBACK_KEY} from "$env/static/private"
 
 const registerSchema = z.object({
     username: z
@@ -31,7 +30,7 @@ const registerSchema = z.object({
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    register: async ({ request, locals }) => {
+    default: async ({ request, locals }) => {
         //convert form entries data to an object
         const body = Object.fromEntries(await request.formData())
 
@@ -75,7 +74,7 @@ export const actions = {
             }
             console.log(" server error", err)
             return fail(500, {
-                errorSupabase: "Server error. Please try again later."
+                errorSupabase: "Someone is already using your Username"
             })
         } else {
             let success = true

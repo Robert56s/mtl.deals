@@ -19,8 +19,7 @@ export async function load({ locals }) {
             .select('avatar_link')
             .eq('id', locals.session.user.id)
         
-        avatar = avatar[0].avatar_link
-        return avatar
+        return avatar[0].avatar_link
     }
 
     return {
