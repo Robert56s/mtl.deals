@@ -9,7 +9,7 @@
     </div>
     <hr>
 </div>
-<form action="?/login" method="POST">
+<form method="POST">
     <h2>Login to an Account</h2>
     <label>
         Email

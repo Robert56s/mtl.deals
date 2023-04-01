@@ -9,6 +9,18 @@
             console.log('hit')
         }
     })
+
+    let formData = {
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirm: '', 
+    }
+
+    export const snapshot = {
+        capture: () => formData,
+        restore: (value) => (formData = value)
+    }
 </script>
 
 <div>
@@ -18,28 +30,28 @@
     </div>
     <hr>
 </div>
-<form action="?/register" method="POST">
+<form method="POST">
     <h2>Create an Account</h2>
     <label> Username
-        <input name="username" type="username" placeholder="ex: bob">
+        <input name="username" type="username" placeholder="ex: bob" bind:value={formData.username}>
         {#if form?.errors?.username}
         <div>{form?.errors?.username[0]}</div>
         {/if}
     </label>
     <label> Email
-        <input name="email" type="email" placeholder="Your email..">
+        <input name="email" type="email" placeholder="Your email.." bind:value={formData.email}>
         {#if form?.errors?.email}
         <div>{form?.errors?.email[0]}</div>
         {/if}
     </label>
     <label> Password
-        <input name="password" type="password"  placeholder="********">
+        <input name="password" type="password"  placeholder="********" bind:value={formData.password}>
         {#if form?.errors?.password}
         <div>{form?.errors?.password[0]}</div>
         {/if}
     </label>
     <label> Confirm Password
-        <input name="passwordConfirm" type="password" placeholder="********">
+        <input name="passwordConfirm" type="password" placeholder="********" bind:value={formData.passwordConfirm}>
         {#if form?.errors?.passwordConfirm}
         <div>{form?.errors?.passwordConfirm[0]}</div>
         {/if}
