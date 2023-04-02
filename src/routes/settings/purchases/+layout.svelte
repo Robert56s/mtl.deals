@@ -1,23 +1,26 @@
 <script>
     import { onMount } from 'svelte';
-    export let data;
+    import { page } from '$app/stores';
 
     let current
-    $: current
 
     onMount(() => {
-        current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
-
-        if (data.urlSearch) {
+        if ($page.url.search == '?bought') {
             current = 'purchases'
         }
     })
+
+    function getPath(currentPath) {
+        current = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+    }
+
+    $: getPath($page.url.pathname);
 
 </script>
 
 <div class="container">
     <div class="bar">
-        <a href="/settings/purchases" class="nav" class:active={current === 'purchases' && 'success'} on:click={() => current = 'purchases'}>Active Purchases</a>
+        <a href="/settings/purchases" class="nav" class:active={current === 'purchases'} on:click={() => current = 'purchases'}>Active Purchases</a>
         <a href="/settings/purchases/archive" class="nav" class:active={current === 'archive'} on:click={() => current = 'archive'}>Archived Purchases</a>
     </div>
     <slot></slot>

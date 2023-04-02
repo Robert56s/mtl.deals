@@ -5,16 +5,6 @@
 
 	import toast,{ Toaster } from 'svelte-french-toast';
 
-	import { page } from '$app/stores';
-    let path;
-
-    function getPath(currentPath) {
-        path = currentPath;
-        console.log(path);
-    }
-
-    $: getPath($page.url.pathname);
-
 	import { Shadow } from 'svelte-loading-spinners';
 
 	import { navigating } from '$app/stores'

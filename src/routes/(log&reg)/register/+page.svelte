@@ -17,10 +17,11 @@
         passwordConfirm: '', 
     }
 
+    /** @type {import('./$types').Snapshot<string>} */
     export const snapshot = {
         capture: () => formData,
         restore: (value) => (formData = value)
-    }
+    };
 </script>
 
 <div>

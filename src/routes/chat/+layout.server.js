@@ -7,8 +7,8 @@ export const load = async ({ locals }) => {
         .select(`*, offers (*), seller_id(*), buyer_id(*)`)
         .eq('active', true)
         
-        const result = receipts.filter(body => body.buyer_id.id || body.seller_id.id == locals.session.user.id)
-        
+        const result = receipts.filter(receipts => receipts.buyer_id.id == locals.session.user.id || receipts.seller_id.id == locals.session.user.id)
+        console.log(result)
         return result
     }
 

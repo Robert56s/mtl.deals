@@ -1,18 +1,23 @@
 <script>
     import { onMount } from 'svelte';
+    import { page } from '$app/stores';
     import toast from 'svelte-french-toast';
-    export let data;
 
     let current;
-    $: current
+    
     onMount(() => {
-        current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
-
-        if (data.urlSearch == '?bought') {
+        if ($page.url.search == '?bought') {
             toast.success('Successfully bought!\nYou can now chat with the seller!', { duration: 3000 })
             current = 'purchases'
         }
     })
+
+
+    function getPath(currentPath) {
+        current = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+    }
+
+    $: getPath($page.url.pathname);
     
 </script>
 
@@ -26,9 +31,9 @@
             <div class="card">
                 <a href="/settings/general" class:active={current === 'general'} on:click={() => current = 'general'}>General</a>
                 <a href="/settings/my-offers" class:active={current === 'my-offers'} on:click={() => current = 'my-offers'}>My Offers</a>
-                <a href="/settings/purchases" class:active={current === 'purchases' && 'archive' && 'success'} on:click={() => current = 'purchases'}>Purchases</a>
-                <a href="/settings/wallet" class:active={current === 'deposit' && 'withdraw' && 'history'} on:click={() => current = 'deposit'}>Wallet</a>
-                <a href="/settings/general" class:active={current === 'other'} on:click={() => current = 'other'}>Misc</a>
+                <a href="/settings/purchases" class:active={current === 'purchases' || current === 'archive'} on:click={() => current = 'purchases'}>Purchases</a>
+                <a href="/settings/wallet" class:active={current === 'deposit' || current === 'withdraw' || current === 'history'} on:click={() => current = 'wallet'}>Wallet</a>
+                <a href="/about" class:active={current === 'about'} on:click={() => current = 'about'}>Misc</a>
             </div>
         </div>
         <div class="content">
