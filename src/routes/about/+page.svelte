@@ -7,7 +7,7 @@
     <button onclick="history.back()"><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></button>
 </div>
 <p>
-    Bienvenie à notre compagnie! 
+    Bienvenie à notre compagnie! <br> <br>
     On est la meilleur destination pour recevoir les meileurs offres sur les produits que vous voulez. 
     Nos employés travails fort pour vous donner vos besoins. 
     Sur la page principal, vous allez trouver plusieurs offres, une barre de navigation avec un bouton login, register, un menu principal, une option de créer une offre de vente et votre portefeuille.
@@ -36,5 +36,9 @@
     .bar button {
         all: unset;
         cursor: pointer;
+    }
+    p {
+        margin-top: 2rem;
+        margin-inline: 1rem;
     }
 </style>

@@ -33,7 +33,7 @@
                 <a href="/settings/my-offers" class:active={current === 'my-offers'} on:click={() => current = 'my-offers'}>My Offers</a>
                 <a href="/settings/purchases" class:active={current === 'purchases' || current === 'archive'} on:click={() => current = 'purchases'}>Purchases</a>
                 <a href="/settings/wallet" class:active={current === 'deposit' || current === 'withdraw' || current === 'history'} on:click={() => current = 'wallet'}>Wallet</a>
-                <a href="/about" class:active={current === 'about'} on:click={() => current = 'about'}>Misc</a>
+                <a href="/about" class:active={current === 'about'} on:click={() => current = 'about'}>About</a>
             </div>
         </div>
         <div class="content">

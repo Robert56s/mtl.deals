@@ -8,7 +8,6 @@ export const load = async ({ locals }) => {
         .eq('active', true)
         
         const result = receipts.filter(receipts => receipts.buyer_id.id == locals.session.user.id || receipts.seller_id.id == locals.session.user.id)
-        console.log(result)
         return result
     }
 

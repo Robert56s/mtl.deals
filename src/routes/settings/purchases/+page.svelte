@@ -80,7 +80,7 @@
             This will archive the purchase and <br> close comunication with the seller
         </p>
         Are you sure?
-        <button class="yes" on:click={archive()}>Yes</button>
+        <button class="yes" on:click={() => {archive()}}>Yes</button>
         <button class="no" on:click={()=>{popup = false}}>No</button>
     </div> 
 {/if}

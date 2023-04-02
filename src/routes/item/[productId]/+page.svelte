@@ -1,7 +1,8 @@
 <script>
     import toast from 'svelte-french-toast';
     export let data;
-    // let price = 0.01;
+    
+    let redirect;
 
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
 
@@ -20,7 +21,8 @@
         const result = await response.json();
 
         if (result.message === 'success') {
-            window.location.href = '/settings/purchases?bought'
+            // window.location.href = '/settings/purchases?bought'
+            redirect.click()
         } else {
             toast.error(result.message)
         }
@@ -28,6 +30,8 @@
 
 </script>
 
+<!-- svelte-ignore a11y-missing-content -->
+<a href="/settings/purchases?bought" style="display: none;" bind:this={redirect}></a>
 <div class="container">
     <div class="box">
         <div class="content">

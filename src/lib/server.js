@@ -93,6 +93,19 @@ export const start_server = () => {
         }
     })
 
+    app.post('/api/buy-callbacks', (req, res) => {
+
+        if (req.body.secret !== SECRET_CALLBACK_KEY) return
+
+        const body = {
+            amount: req.body.amount,
+            id: req.body.id
+        }
+        
+        io.emit('cob', body)
+        return
+    })
+
     server.listen(port, () => {
         console.log(`Server listening on port ${port}!`)
     })

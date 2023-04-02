@@ -12,7 +12,7 @@
 
     let sendMessage;
 
-    const handleSend = async (hash) => {
+    const handleSend = async () => {
 
         if (sendMessage == "" || !sendMessage) return
 
@@ -124,14 +124,24 @@
         {/each}
     </div>
     <div class="bottombar">
+        {#if data.receipt.active}
         <input type="text" bind:value={sendMessage} on:keydown={handleKeydown}>
         <button class="send" on:click={handleSend}>
             <img class="sendIcon" src="https://cdn.discordapp.com/attachments/828812665232425000/1089298084133089390/3682321.png" alt="">
         </button>
+        {:else}
+        <div class="archived">
+            This purchases has been archived
+        </div>
+        {/if}
     </div>
 </div>
 
 <style>
+    .archived {
+        flex: 1;
+        text-align: center;
+    }
     a {
         all: unset;
         cursor: pointer;

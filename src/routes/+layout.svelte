@@ -30,14 +30,6 @@
 			
 			const socket = io('http://localhost:8080')
 		
-			socket.on('eventFromServer', (message) => {
-				console.log(message)
-			})
-
-			socket.on('time', (message) => {
-				console.log(message)
-			})
-		
 			socket.on('conf', (body) => {
 				if (body.conf == 0 && body.user_id == data.session.user.id) {
 					toast(`${formatter.format((body.amount/100000000)*data.ltcPrice)} received, waiting for confirmation`, {
@@ -50,6 +42,16 @@
 					})
 					console.log("1 conf hit server")
 					money += ((body.amount/100000000)*data.ltcPrice)
+				}
+			})
+
+			socket.on('cob', (body) => {
+				if (body.id.includes(data.session.user.id)) {
+					if (body.id.indexOf(data.session.user.id) == 0){
+						money -= Number(body.amount)
+					} else {
+						money += Number(body.amount)
+					}
 				}
 			})
 			

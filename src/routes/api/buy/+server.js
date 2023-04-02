@@ -1,4 +1,6 @@
 
+import { SECRET_CALLBACK_KEY } from '$env/static/private'
+
 const getLtcPrice = async () => {
     
     let responce = await fetch('https://min-api.cryptocompare.com/data/price?fsym=LTC&tsyms=USD', {
@@ -10,6 +12,24 @@ const getLtcPrice = async () => {
     let responceData = await responce.json()
     return responceData.USD
     
+}
+
+const sendCallback = async (money, buyer, seller) => {
+    let responce = await fetch('http://127.0.0.1:8080/api/buy-callbacks', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            secret: SECRET_CALLBACK_KEY,
+            amount: money,
+            id: [
+                buyer,
+                seller
+            ],
+        })
+    })
+    let responceData = await responce.json()
 }
 
 export const POST = async ({ request, locals }) => {
@@ -61,6 +81,8 @@ export const POST = async ({ request, locals }) => {
     .from('offers')
     .update({ active: false })
     .eq('id', body.id)
+
+    sendCallback(Number(body.price), locals.session.user.id, body.seller_id)
         
     return new Response(JSON.stringify({message: "success", amount: ltcAmount}));
 }
