@@ -1,13 +1,15 @@
 <script>
     import { onMount } from 'svelte';
+    import { page } from '$app/stores';
     export let data;
 
     let current
-    
-    onMount(() => {
-        current = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
-        console.log(current)
-    })
+
+    function getPath(currentPath) {
+        current = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+    }
+
+    $: getPath($page.url.pathname);
 
 </script>
 

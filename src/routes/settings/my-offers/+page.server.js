@@ -15,7 +15,6 @@ export const load = async ({ locals }) => {
         .from('receipts')
         .select(`*, offers (*), seller_id(*), buyer_id(*)`)
         .eq('seller_id', locals.session.user.id)
-        .eq('active', true)
         return receipts
     }
 

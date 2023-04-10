@@ -100,11 +100,15 @@
             </div>
         </div>
         <div class="icons">
-            {#if data.receipt.buyer_id.id == data.session.user.id}
+            {#if data.receipt.active == false}
+            <button onclick="history.back()" >
+                <img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="">
+            </button>
+            {:else if data.receipt.buyer_id.id == data.session.user.id}
             <a href="/settings/purchases">
                 <img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="">
             </a>
-            {:else}
+            {:else if data.receipt.seller_id.id == data.session.user.id}
             <a href="/settings/my-offers">
                 <img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="">
             </a>
@@ -288,7 +292,7 @@
         align-items: center;
 
     }
-    .icons a {
+    .icons a, .icons button {
         all: unset;
         cursor: pointer;
         padding: 0.5rem;
@@ -297,7 +301,7 @@
         justify-content: center;
         align-items: center;
     }
-    .icons a:hover {
+    .icons a:hover, .icons button:hover {
         padding: 0.5rem;
         background-color: #bdbdbd;
         border-radius: 5px;

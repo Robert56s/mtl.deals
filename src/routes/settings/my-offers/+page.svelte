@@ -1,7 +1,34 @@
 <script>
     import toast from 'svelte-french-toast';
-  import { each } from 'svelte/internal';
     export let data;
+
+    let products, receipts
+    let current = "all";
+
+    $: products
+    $: receipts
+
+    products = data.products
+    receipts = data.receipts
+    
+    const selectAll = async () => {
+        products = data.products
+        receipts = data.receipts
+        current = "all"
+    }
+    
+    const selectActive = async () => {
+        products = data.products
+        receipts = []
+        current = 'active'
+    }
+    
+    const selectBought = async () => {
+        products = []
+        receipts = data.receipts
+        current = 'bought'
+    }   
+    
 
     const formatter = new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', minimumFractionDigits: 0});
     
@@ -34,10 +61,15 @@
 
 <div class="container">
     <div class="bar">
-        <a href="/create">New Offer</a>
+        <a href="/create" class="new">New Offer</a>
+        <div class="select">
+            <button on:click={selectAll} class:active={current === 'all'}>All</button>
+            <button on:click={selectActive} class:active={current === 'active'}>Active</button>
+            <button on:click={selectBought} class:active={current === 'bought'}>Bought</button>
+        </div>
     </div>
     <div class="main">
-        {#each [... data.products].reverse() as product, i}
+        {#each [... products].reverse() as product, i}
         {#if product.active}
         <a href="/item/{product.id}" class="anchor">
             <div class="card" id={i + 1} bin>
@@ -75,7 +107,7 @@
         </a>
         {/if}
         {/each}
-        {#each [... data.receipts].reverse() as receipt, i}
+        {#each [... receipts].reverse() as receipt, i}
         <a href="/chat/{receipt.chat_id}" class="anchor">
             <div class="card" id={i + 1} bin>
                 <div class="view">
@@ -98,21 +130,15 @@
                                 {#if receipt.active}
                                 Status: Sold, waiting for buyer confirmation
                                 {:else}
-                                Status: sold
+                                Status: Sold
                                 {/if}
                             </div>
                         </div>
                     </div>
                     <div class="icons">
-                        {#if receipt.active}
                         <a href="/chat/{receipt.chat_id}">
                             <img src="https://cdn.discordapp.com/attachments/828812665232425000/1089203367676485694/chat.png" alt="">
-                        </a>
-                        {:else}
-                        <button>
-                            Archive
-                        </button>
-                        {/if}
+                        </a>  
                     </div>
                 </div>
             </div>
@@ -129,11 +155,11 @@
 
     .bar {
         display: flex;
-        justify-content: left;
+        justify-content: space-between;
         align-items: center;
 
     }
-    .bar a {
+    .new {
         text-decoration: none;
 	    color: rgb(77, 77, 77);
         padding: 1rem 2rem;
@@ -142,11 +168,36 @@
 	  	border-radius: 6px;
 	  	transition: 0.3s;
     }
-    .bar a:hover {
+    .new:hover {
         background: #e2e2e2;
     }
-    .bar a:active {
+    .new:active {
         transform: scale(0.9);
+    }
+
+    .select {
+        background-color: #e7e7e7;
+        padding: 0.5rem;
+        border-radius: 0.3rem;
+    }
+    .select button {
+        all: unset;
+        cursor: pointer;
+	    color: rgb(77, 77, 77);
+        background-color: #cecece;
+        padding: 0.5rem 1rem;
+        border-radius: 0.3rem;
+        transition: 0.3s;
+        
+    }
+    .select button:hover {
+        background-color: #b1b1b1;
+    }
+    .select button:active {
+        transform: scale(0.9);
+    }
+    .active {
+        background-color: #b1b1b1 !important;
     }
 
     .anchor {
