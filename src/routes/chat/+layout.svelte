@@ -24,10 +24,10 @@
                 <div class="bubble" class:active={current === `${chat.chat_id}`}>
                     {#if chat.buyer_id.id == data.session.user.id}
                     <img src="{chat.seller_id.avatar_link}" alt="" class="icon">
-                    {chat.seller_id.username} for <br> {chat.offers.title}
+                    {chat.seller_id.username} - Buying {chat.offers.title}
                     {:else}
                     <img src="{chat.seller_id.avatar_link}" alt="" class="icon">
-                    Selling {chat.offers.title} to {chat.buyer_id.username}
+                    {chat.buyer_id.username} - Selling {chat.offers.title}
                     {/if}
                 </div>
             </a>

@@ -1,4 +1,5 @@
 <script>
+    import { PUBLIC_SERVER_URL } from '$env/static/public'
     import { scale } from 'svelte/transition';
     import { io } from 'socket.io-client'
     import { onDestroy, onMount } from 'svelte';
@@ -26,7 +27,7 @@
             chat_id: data.receipt.chat_id
         }, data.receipt.chat_id)
 
-        const response = fetch('/api/chat', {
+        const response = await fetch('/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +39,7 @@
             })
         })
         sendMessage = ""
-        const result = await response.json();
+        const result = await response.json()
     }
 
     const handleKeydown = async (e) => {
@@ -52,7 +53,7 @@
         let last = document.querySelector('#bite');
         last.scrollTop = last.scrollHeight;
 
-        socket = io('http://localhost:8080')
+        socket = io(`${PUBLIC_SERVER_URL}`)
         socket.emit('join-room', data.receipt.chat_id)
         socket.on("receive-message", (body) => {
             messages = [...messages, body]

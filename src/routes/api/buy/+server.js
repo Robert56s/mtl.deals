@@ -1,5 +1,6 @@
 
 import { SECRET_CALLBACK_KEY } from '$env/static/private'
+import { PUBLIC_SERVER_URL } from '$env/static/public'
 
 const getLtcPrice = async () => {
     
@@ -15,7 +16,7 @@ const getLtcPrice = async () => {
 }
 
 const sendCallback = async (money, buyer, seller) => {
-    let responce = await fetch('http://127.0.0.1:8080/api/buy-callbacks', {
+    let responce = await fetch(`${PUBLIC_SERVER_URL}/buy-callbacks`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'

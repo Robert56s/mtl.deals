@@ -2,6 +2,7 @@
 	export let data;
 	// console.log(data)
     //https://codepen.io/AlaDyn172/pen/ZMeraJ
+	import { PUBLIC_SERVER_URL } from '$env/static/public'
 
 	import toast,{ Toaster } from 'svelte-french-toast';
 
@@ -28,7 +29,7 @@
 	onMount(() => {
 		if (data.session) {
 			
-			const socket = io('http://localhost:8080')
+			const socket = io(`${PUBLIC_SERVER_URL}`)
 		
 			socket.on('conf', (body) => {
 				if (body.conf == 0 && body.user_id == data.session.user.id) {
@@ -70,6 +71,39 @@
 </script>
 
 <svelte:head>
+	<!-- Primary Meta Tags -->
+    <title>mtl.deals - Best Online Marketplace in Montreal</title>
+    <meta name="title" content="mtl.deals - Best Online Marketplace in Montreal" />
+    <meta
+      name="description"
+      content="mtl.deals is an online marketplace where user in montreal can sell their items using crypto curencies."
+    />
+  
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mtl.deals/" />
+    <meta property="og:title" content="mtl.deals - Best Online Marketplace in Montreal" />
+    <meta
+      property="og:description"
+      content="mtl.deals is an online marketplace where user in montreal can sell their items using crypto curencies."
+    />
+    <meta
+      property="og:image"
+      content="https://cdn.discordapp.com/attachments/828812665232425000/1099846968748015666/logo2.png"
+    />
+  
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://mtl.deals/" />
+    <meta property="twitter:title" content="mtl.deals - Best Online Marketplace in Montreal" />
+    <meta
+      property="twitter:description"
+      content="mtl.deals is an online marketplace where user in montreal can sell their items using crypto curencies"
+    />
+    <meta
+      property="twitter:image"
+      content="https://cdn.discordapp.com/attachments/828812665232425000/1099846968748015666/logo2.png"
+    />
 	<style>
 	  	@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
@@ -89,6 +123,27 @@
 	  	::-webkit-scrollbar {
 	  		width: 0;
 	  	}
+
+		@media screen and (max-width: 1045px) {
+			html {
+				font-size: 14px;
+			}
+		}
+		@media screen and (max-width: 810px) {
+			html {
+				font-size: 12px;
+			}
+		}
+		@media screen and (max-width: 629px) {
+			html {
+				font-size: 10px;
+			}
+		}
+		@media screen and (max-width: 535px) {
+			html {
+				font-size: 8px;
+			}
+		}
 	</style>
 </svelte:head>
 
@@ -96,7 +151,7 @@
 	<Toaster></Toaster>
 	<div class="page">
 		<header>
-			<a href="/"><h1>mtl.deals</h1></a>
+			<a href="/"><img src="https://cdn.discordapp.com/attachments/828812665232425000/1099846968748015666/logo2.png" alt="" class="logo"></a>
 			{#if data.session}
 			<div class="right">
 				<!-- svelte-ignore a11y-invalid-attribute -->
@@ -136,7 +191,9 @@
 </div>
 
 <style>
-
+	.logo {
+		height: 5rem;
+	}
 	.right {
 		display: flex;
 		align-items: center;
@@ -254,7 +311,7 @@
 
 	.menu {
 		aspect-ratio: 1/1;
-		height: 50px;
+		height: 3.125rem;
 	}
 	#aMenu {
 		background-color: rgba(128, 128, 128, 0);

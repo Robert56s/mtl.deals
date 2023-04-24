@@ -1,6 +1,8 @@
 import express from 'express'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
+import { PUBLIC_APP_URL } from '$env/static/public'
+console.log(PUBLIC_APP_URL)
 import { SECRET_CALLBACK_KEY } from '$env/static/private'
 import { getServiceSupabase } from '$lib/servicerole';
 
@@ -38,7 +40,8 @@ export const start_server = () => {
     const server = createServer(app)
     const io = new Server(server, {
         cors: {
-            origin: '*' //a changer en prod
+            origin: `${PUBLIC_APP_URL}`,
+            methods: ["GET", "POST"]
         }
     })
 
@@ -58,7 +61,7 @@ export const start_server = () => {
 
     });
 
-    app.post('/api/ltc-callbacks', (req, res) => {
+    app.post('/ltc-callbacks', (req, res) => {
         let data = JSON.parse(JSON.stringify(req.body));
         console.log(data)
         res.setHeader('content-type', 'text/plain');
@@ -93,7 +96,7 @@ export const start_server = () => {
         }
     })
 
-    app.post('/api/buy-callbacks', (req, res) => {
+    app.post('/buy-callbacks', (req, res) => {
 
         if (req.body.secret !== SECRET_CALLBACK_KEY) return
 

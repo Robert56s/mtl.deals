@@ -1,15 +1,21 @@
 import { SECRET_LTC_TRANSFER_KEY, SECRET_LTC_WALLET_ID, SECRET_CALLBACK_KEY } from '$env/static/private'
 import axios from 'axios';
 
+function isValidLitecoinAddress(address) {
+    const regexLegacy = /^(L|M)[a-km-zA-HJ-NP-Z1-9]{26,33}$/;
+    const regexBech32 = /^(ltc1)[023456789acdefghjklmnpqrstuvwxyz]{8,87}$/;
+  
+    return regexLegacy.test(address) || regexBech32.test(address);
+}
+
 export const POST = async ({ request, locals }) => {
 
     const body = await request.json();
 
-    let patern = new RegExp('/^[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}$/')
-
-    // if (!patern.test(body.withAddy)) {
-    //     return new Response(JSON.stringify({ err: true, message: "Address is invalid"}));
-    // }
+    
+    if (!isValidLitecoinAddress(body.withAddy)) {
+        return new Response(JSON.stringify({ err: true, message: "You Litecoin address is not valid"}));
+    }
 
     if (body.withAmt < 1000000) {
         return new Response(JSON.stringify({ err: true, message: "You need to withdraw at least 0.01 ltc"}));

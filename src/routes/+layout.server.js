@@ -1,5 +1,6 @@
 import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 import { SECRET_LTC_WALLET_ID, SECRET_CALLBACK_KEY } from "$env/static/private"
+import { PUBLIC_SERVER_URL } from '$env/static/public'
 import axios from 'axios';
 
 const getAddy = async (event) => {
@@ -28,7 +29,7 @@ const getAddy = async (event) => {
         "addr-type": "p2sh-p2wpkh",
         "callback": {
             "method": "POST",
-            "url": `https://e402-69-156-27-138.ngrok.io/api/ltc-callbacks`,
+            "url": `${PUBLIC_SERVER_URL}/ltc-callbacks`,
             "data": {
                 "key": `${SECRET_CALLBACK_KEY}`,
                 "user_id": `${event.locals.session.user.id}`,

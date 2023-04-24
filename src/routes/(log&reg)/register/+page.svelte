@@ -62,7 +62,7 @@
     </label>
     <label>
         <input class="checkbox" type="checkbox" name="tos">
-        I agree and understand the Terms & Condistions*
+        I agree and understand the Terms & Conditions*
         {#if form?.errors?.tos}
         <div>{form?.errors?.tos[0]}</div>
         {/if}
