@@ -42,6 +42,10 @@
         }
 
     }
+
+    const handleFilesSelect = async (e) => {
+        console.log(e)
+    }
 </script>
 
 <div class="container">
@@ -50,7 +54,7 @@
         <a href="/settings/my-offers" bind:this={redirect}><img src="https://cdn.discordapp.com/attachments/828812665232425000/1059637389305331812/back2.png" alt="go back"></a>
     </div>
     <div class="main">
-        <div class="view-img">
+        <div class="view-img" on:filedrop={event => handleFilesSelect(event)}>
             <h2>Picture</h2>
             {#if img}
             <img class="img" src="{img}" alt="img">
